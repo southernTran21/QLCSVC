@@ -3,9 +3,17 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "axios": "^0.21.0",
+    "classnames": "^2.2.6",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "mongoose": "^5.10.10",
+    "node-sass": "^4.14.1",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
-    "react-scripts": "^3.4.4"
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "^3.4.4",
+    "sass": "^1.27.0"
   },
   "scripts": {
     "start": "react-scripts start",
