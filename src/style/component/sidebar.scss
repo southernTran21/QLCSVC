@@ -1,0 +1,27 @@
+.sidebar{
+    background-color: #222d32;
+    height: 85vh;
+    border-radius: 0 0 20px 0;
+    .ant-menu{
+        width: 100% !important;
+        background-color: #222d32;
+        color: white;
+    }
+    .ant-menu-submenu > .ant-menu {
+        background-color: #222d32;
+    }
+    .ant-menu-inline{
+        border: none;
+    }
+    .ant-menu-submenu-arrow{
+        background-color: white;
+        color: white;
+        &::before, &::after{
+            background-color: #fff;
+            background-image: linear-gradient(to right, #fff, #fff) !important;
+        }
+    }
+    .ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected{
+        background-color: transparent;
+    }
+}

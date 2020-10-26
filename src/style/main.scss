@@ -1,3 +1,11 @@
 // BASE
-@import "./base/reset";
+@import "./base/reset.scss";
 @import "./base/typography.scss";
+@import "./base/mixins.scss";
+
+// PAGE
+@import "./page/login.scss";
+
+// COMPONENT
+@import "./component/navbar.scss";
+@import "./component/sidebar.scss";

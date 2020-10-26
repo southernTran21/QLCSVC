@@ -143,12 +143,12 @@ a {
     outline: none;
     width: fit-content;
     height: fit-content;
-    color: $--black-color;
+    color: black;
     cursor: pointer;
 }
-a:hover{
-    color: $--primary-color !important;
-}
-a:active{
-    color: $--primary-color !important;
-}
+// a:hover{
+//     color: $- !important;
+// }
+// a:active{
+//     color: $--primary-color !important;
+// }

@@ -1,0 +1,89 @@
+.login {
+    /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#8400cd+0,8400cd+33,b800c4+76,b800c4+100 */
+    background: #8400cd; /* Old browsers */
+    background: -moz-linear-gradient(
+        left,
+        #8400cd 0%,
+        #8400cd 33%,
+        #b800c4 76%,
+        #b800c4 100%
+    ); /* FF3.6-15 */
+    background: -webkit-linear-gradient(
+        left,
+        #8400cd 0%,
+        #8400cd 33%,
+        #b800c4 76%,
+        #b800c4 100%
+    ); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(
+        to right,
+        #8400cd 0%,
+        #8400cd 33%,
+        #b800c4 76%,
+        #b800c4 100%
+    ); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#8400cd', endColorstr='#b800c4',GradientType=1 ); /* IE6-9 */
+
+    @include box(100vw, 100vh);
+    @include centerFlexBox();
+    &__form {
+        /* Display & Box Model */
+        @include box(90rem, 50rem);
+        @include flexBox();
+        border-radius: 30px;
+        /* Color */
+        background-color: white;
+        /* Text */
+    
+        /* Positioning */
+    
+        /* Others: transition & animations, ... */
+    
+    }
+    &__left {
+        @include box(45%, 100%);
+        @include centerFlexBox();
+    }
+    &__image-wrapper {
+        @include box(30rem);
+        background-color: #e4e4e4;
+        padding: 7rem;
+        border-radius: 50%;
+    }
+    &__right {
+        @include box(55%, 100%);
+        @include flexBox(center, center, column);
+    }
+    &__title {
+        font-size: 3rem;
+        text-align: center;
+    }
+    &__input {
+        font-size: 2rem;
+        border-radius: 30px;
+        padding: 1rem 1.5rem;
+        outline: none;
+        box-shadow: none;
+        margin-top: 2rem;
+        width: 30rem;
+    }
+    &__button {
+        background-color: #1FCC44;
+        @include box(30rem, 4.5rem);
+        @include centerFlexBox();
+        border-radius: 30px;
+        margin-top: 2rem;
+        font-size: 2rem;
+        cursor: pointer;
+        transition: .25s ease-in-out all;
+        a{
+            transition: .25s ease-in-out all;
+        }
+        &:hover{
+            background-color: #148f2f;
+            a{
+                color: white;
+            }
+        }
+    }
+}
