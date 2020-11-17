@@ -3,12 +3,19 @@
         "antd",
         "appstore",
         "browserslist",
+        "callouts",
         "colada",
         "colorstr",
         "danh",
         "flexbox",
+        "h",
+        "hành",
         "i",
         "idcard",
+        "khai",
+        "konqueror",
+        "lo",
+        "loại",
         "mixins",
         "n",
         "ng",
@@ -22,6 +29,8 @@
         "qu",
         "quản",
         "submenu",
+        "th",
+        "tháng",
         "đăng"
     ]
 }

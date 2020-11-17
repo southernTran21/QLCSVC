@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Menu } from "antd";
 import {
-    MailOutlined, DesktopOutlined, UserOutlined, FundProjectionScreenOutlined, IdcardOutlined,
+    DesktopOutlined, UserOutlined, FundProjectionScreenOutlined, IdcardOutlined,
 } from "@ant-design/icons";
 
 const { SubMenu } = Menu;
@@ -29,22 +29,26 @@ export default class SideBar extends Component {
     render() {
         return (
             <div className="sidebar">
+                <div className="sidebar__information">
+                    <div className="sidebar__avatar"></div>
+                    <p className="sidebar__name">ADMIN</p>
+                </div>
                 <Menu
                     mode="inline"
                     openKeys={this.state.openKeys}
                     onOpenChange={this.onOpenChange}
-                    style={{ width: 256 }}
+                    style={{ width: "100%" }}
                 >
-                    <Menu.Item icon={<DesktopOutlined />} key="sub1">Quản trị tài sản</Menu.Item>
-                    <Menu.Item icon={<UserOutlined />}>Quản trị người dùng</Menu.Item>
-                    <Menu.Item icon={<IdcardOutlined />}>Quản trị hệ thống</Menu.Item>
                     <SubMenu
                         icon={<FundProjectionScreenOutlined />}
-                        title="Báo cáo thống kê"
+                        title="Tài Sản"
+                        key="sub1"
                     >
-                        <Menu.Item key="1">Option 1</Menu.Item>
+                        <Menu.Item key="1">Tất Cả Tài Sản</Menu.Item>
+                        <Menu.Item key="2">Tôi Quản Lý</Menu.Item>
+                        <Menu.Item key="3">Tôi Sử Dụng</Menu.Item>
                     </SubMenu>
-                    
+                    <Menu.Item icon={<UserOutlined />}>Loại Tài Sản</Menu.Item>
                 </Menu>
             </div>
         );

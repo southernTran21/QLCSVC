@@ -1,7 +1,0 @@
-.navbar{
-    @include box(100vw, 5.5rem);
-    background-color: #0078da;
-    padding: 0 3rem;
-    @include flexBox(space-between, center);
-    color: white;
-}

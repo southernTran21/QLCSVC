@@ -1,0 +1,55 @@
+.home {
+    background-color: #f0f0f0;
+    &__top {
+        background-color: #fff;
+        height: 5rem;
+        @include flexBox(flex-start, center);
+        padding: 0 1rem;
+    }
+    &__body {
+        overflow-x: hidden;
+        overflow-y: scroll;
+        max-height: 93vh;
+    }
+    &__title {
+        font-size: 2rem;
+    }
+    &__warranty {
+        padding: 1rem;
+        @include flexBox(space-between);
+        &-expires {
+            width: 32%;
+            background-color: #fff;
+            @include flexBox();
+            border-radius: 7px;
+            &__icon {
+                @include box(7rem);
+                @include centerFlexBox();
+                font-size: 4rem;
+                color: white;
+                border-radius: 7px 0 0 7px;
+                &--red {
+                    background-color: red;
+                }
+                &--yellow {
+                    background-color: rgb(219, 219, 0);
+                }
+                &--blue {
+                    background-color: rgb(41, 41, 255);
+                }
+            }
+            &__right {
+                @include flexBox(space-between, flex-start, column);
+                height: 7rem;
+                padding: 0.5rem 1rem;
+            }
+            &__title {
+                font-size: 1.6rem;
+            }
+            &__quantity {
+                font-size: 2.5rem;
+                color: rgb(0, 189, 0);
+            }
+        }
+    }
+}

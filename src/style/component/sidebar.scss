@@ -1,7 +1,30 @@
 .sidebar{
     background-color: #222d32;
-    height: 85vh;
-    border-radius: 0 0 20px 0;
+    height: 100vh;
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer */
+    -khtml-user-select: none; /* KHTML browsers (e.g. Konqueror) */
+    -webkit-user-select: none; /* Chrome, Safari, and Opera */
+    -webkit-touch-callout: none; /* Disable Android and iOS callouts*/
+    &__information {
+        @include flexBox(flex-start, center);
+        padding-top: 3rem;
+        padding-bottom: 2rem;
+        padding-left: 1.6rem;
+    }
+
+    &__avatar {
+        @include box(6rem);
+        background-color: #fff;
+        border-radius: 50%;
+    }
+
+    &__name {
+        font-weight: bold;
+        color: white;
+        margin-left: 1rem !important;
+    }
+
     .ant-menu{
         width: 100% !important;
         background-color: #222d32;
@@ -23,5 +46,8 @@
     }
     .ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected{
         background-color: transparent;
+    }
+    .ant-menu-vertical .ant-menu-item::after, .ant-menu-vertical-left .ant-menu-item::after, .ant-menu-vertical-right .ant-menu-item::after, .ant-menu-inline .ant-menu-item::after{
+        border-right: 5px solid #1890ff;
     }
 }

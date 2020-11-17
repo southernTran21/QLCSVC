@@ -4,7 +4,6 @@ import "./App.css";
 import "./style/main.scss";
 import "antd/dist/antd.css";
 import LoginPage from "./layouts/login";
-import Navbar from "./components/navbar";
 import SideBar from "./components/sidebar";
 import HomeAdmin from "./layouts/home";
 
@@ -19,7 +18,6 @@ class App extends Component {
                         component={() => {
                             return (
                                 <Fragment>
-                                    <Navbar />
                                     <div
                                         style={{
                                             width: "100%",

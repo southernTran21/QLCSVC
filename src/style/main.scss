@@ -3,9 +3,9 @@
 @import "./base/typography.scss";
 @import "./base/mixins.scss";
 
+// COMPONENT
+@import "./component/sidebar.scss";
+
 // PAGE
 @import "./page/login.scss";
-
-// COMPONENT
-@import "./component/navbar.scss";
-@import "./component/sidebar.scss";
+@import "./page/home.scss";
