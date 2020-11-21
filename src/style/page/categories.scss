@@ -1,0 +1,35 @@
+.categories{
+    &__top {
+        background-color: #fff;
+        height: 5rem;
+        @include flexBox(space-between, center);
+        padding: 0 3rem 0 1rem;
+    }
+    &__title {
+        font-size: 2rem;
+    }
+    &__button {
+        background-color: rgb(0, 174, 255);
+        color: white;
+        padding: .5rem 1rem;
+        border-radius: 7px;
+        cursor: pointer;
+        &__text {
+            margin-left: 0.3rem;
+        }
+        &:nth-child(2){
+            margin-left: 1rem;
+            background-color:rgb(0, 190, 0);
+        }
+        &:nth-child(3){
+            margin-left: 1rem;
+            background-color: red;
+        }
+    }
+    &__right {
+        @include flexBox(flex-start, center, row);
+    }
+    &__table {
+        padding: 1rem;
+    }
+}

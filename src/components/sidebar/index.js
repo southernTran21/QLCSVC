@@ -1,7 +1,11 @@
 import React, { Component } from "react";
 import { Menu } from "antd";
+import { Link } from "react-router-dom";
 import {
-    DesktopOutlined, UserOutlined, FundProjectionScreenOutlined, IdcardOutlined,
+    DesktopOutlined,
+    UserOutlined,
+    FundProjectionScreenOutlined,
+    IdcardOutlined,
 } from "@ant-design/icons";
 
 const { SubMenu } = Menu;
@@ -39,6 +43,9 @@ export default class SideBar extends Component {
                     onOpenChange={this.onOpenChange}
                     style={{ width: "100%" }}
                 >
+                    <Menu.Item icon={<UserOutlined />}>
+                        <Link to="/admin">Trang Chủ</Link>
+                    </Menu.Item>
                     <SubMenu
                         icon={<FundProjectionScreenOutlined />}
                         title="Tài Sản"
@@ -48,7 +55,9 @@ export default class SideBar extends Component {
                         <Menu.Item key="2">Tôi Quản Lý</Menu.Item>
                         <Menu.Item key="3">Tôi Sử Dụng</Menu.Item>
                     </SubMenu>
-                    <Menu.Item icon={<UserOutlined />}>Loại Tài Sản</Menu.Item>
+                    <Menu.Item icon={<UserOutlined />}>
+                        <Link to="/admin/categories">Loại Tài Sản</Link>
+                    </Menu.Item>
                 </Menu>
             </div>
         );

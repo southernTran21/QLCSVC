@@ -6,6 +6,7 @@ import "antd/dist/antd.css";
 import LoginPage from "./layouts/login";
 import SideBar from "./components/sidebar";
 import HomeAdmin from "./layouts/home";
+import Categories from "./layouts/categories";
 
 class App extends Component {
     render() {
@@ -27,11 +28,21 @@ class App extends Component {
                                         <div style={{ width: "17%" }}>
                                             <SideBar />
                                         </div>
-                                        <div style={{ width: "83%" }}>
+                                        <div
+                                            style={{
+                                                width: "83%",
+                                                backgroundColor: "#f0f0f0",
+                                            }}
+                                        >
                                             <Route
                                                 path={`/admin`}
                                                 exact
                                                 component={HomeAdmin}
+                                            />
+                                            <Route
+                                                path={`/admin/categories`}
+                                                exact
+                                                component={Categories}
                                             />
                                         </div>
                                     </div>

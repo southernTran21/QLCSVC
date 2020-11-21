@@ -50,4 +50,19 @@
     .ant-menu-vertical .ant-menu-item::after, .ant-menu-vertical-left .ant-menu-item::after, .ant-menu-vertical-right .ant-menu-item::after, .ant-menu-inline .ant-menu-item::after{
         border-right: 5px solid #1890ff;
     }
+    a{
+        color: white !important;
+    }
+    .ant-menu-item-selected a, .ant-menu-item-selected a:hover, .ant-menu-item a:hover{
+        color: #1890ff !important;
+    }
+    .ant-menu-vertical > .ant-menu-item, .ant-menu-vertical-left > .ant-menu-item, .ant-menu-vertical-right > .ant-menu-item, .ant-menu-inline > .ant-menu-item, .ant-menu-vertical > .ant-menu-submenu > .ant-menu-submenu-title, .ant-menu-vertical-left > .ant-menu-submenu > .ant-menu-submenu-title, .ant-menu-vertical-right > .ant-menu-submenu > .ant-menu-submenu-title, .ant-menu-inline > .ant-menu-submenu > .ant-menu-submenu-title{
+        line-height: 0;
+        height: 3rem;
+        @include flexBox(flex-start, center);
+    }
+    .ant-menu-sub.ant-menu-inline > .ant-menu-item, .ant-menu-sub.ant-menu-inline > .ant-menu-submenu > .ant-menu-submenu-title{
+        line-height: 0;
+        height: 3rem;
+    }
 }
