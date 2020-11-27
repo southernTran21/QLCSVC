@@ -1,6 +1,7 @@
 {
     "cSpell.ignoreWords": [
         "antd",
+        "anticon",
         "appstore",
         "browserslist",
         "callouts",
@@ -21,10 +22,12 @@
         "ng",
         "người",
         "nh",
+        "nhận",
         "nhập",
         "p",
         "pino",
         "pino colada",
+        "popconfirm",
         "progid",
         "qu",
         "quản",
@@ -32,6 +35,7 @@
         "th",
         "tháng",
         "trang",
-        "đăng"
+        "đăng",
+        "động"
     ]
 }

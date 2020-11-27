@@ -1,5 +1,5 @@
 const express = require("express");
-var cors = require("cors");
+const cors = require("cors");
 const bodyParser = require("body-parser");
 const pino = require("express-pino-logger")();
 require("dotenv").config();
@@ -13,10 +13,12 @@ app.use(express.json());
 // ---------- KHAI BÁO LINK CONNECT  ----------
 const db = require("./connection");
 const categoriesRouter = require("./route/categories");
+const accountRouter = require("./route/account");
 // ---------- END ----------
 
 // ---------- KHAI BÁO ROUTER ----------
-app.use("/categories", categoriesRouter)
+app.use("/categories", categoriesRouter);
+app.use("/account", accountRouter);
 // ---------- END ----------
 
 app.listen(3001, () =>

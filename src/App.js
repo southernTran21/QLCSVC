@@ -7,6 +7,7 @@ import LoginPage from "./layouts/login";
 import SideBar from "./components/sidebar";
 import HomeAdmin from "./layouts/home";
 import Categories from "./layouts/categories";
+import CategoriesAdd from "./layouts/categoriesAdd";
 
 class App extends Component {
     render() {
@@ -43,6 +44,11 @@ class App extends Component {
                                                 path={`/admin/categories`}
                                                 exact
                                                 component={Categories}
+                                            />
+                                            <Route
+                                                path={`/admin/categories-add`}
+                                                exact
+                                                component={CategoriesAdd}
                                             />
                                         </div>
                                     </div>

@@ -1,0 +1,36 @@
+.categories-add{
+    &__top {
+        background-color: #fff;
+        height: 5rem;
+        @include flexBox(flex-start, center);
+        padding: 0 3rem 0 1rem;
+    }
+    &__title {
+        font-size: 2rem;
+        margin-left: 1rem;
+    }
+    &__icon {
+        font-size: 2rem;
+        @include centerFlexBox();
+    }
+    &__body {
+        padding: 1rem;
+    }
+    &__input {
+        input, textarea{
+            margin: 1rem 0;
+            font-size: 1.4rem;
+        }
+        span{
+            font-size: 1.6rem;
+        }
+    }
+    &__button-submit {
+        background-color: #222d32;
+        color: white;
+        @include centerFlexBox();
+        @include box(10rem, 3rem);
+        border-radius: 7px;
+        cursor: pointer;
+    }
+}
