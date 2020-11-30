@@ -14,11 +14,15 @@ app.use(express.json());
 const db = require("./connection");
 const categoriesRouter = require("./route/categories");
 const accountRouter = require("./route/account");
+const danhMucQuyenRouter = require("./route/danhMucQuyen");
+const nhanVienRouter = require("./route/nhanVien");
 // ---------- END ----------
 
 // ---------- KHAI BÁO ROUTER ----------
 app.use("/categories", categoriesRouter);
 app.use("/account", accountRouter);
+app.use("/quyen", danhMucQuyenRouter);
+app.use("/nhanvien", nhanVienRouter);
 // ---------- END ----------
 
 app.listen(3001, () =>

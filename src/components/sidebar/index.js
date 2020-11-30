@@ -58,6 +58,12 @@ export default class SideBar extends Component {
                     <Menu.Item icon={<UserOutlined />}>
                         <Link to="/admin/categories">Loại Tài Sản</Link>
                     </Menu.Item>
+                    <Menu.Item icon={<UserOutlined />}>
+                        <Link to="/admin/account">Tài Khoản</Link>
+                    </Menu.Item>
+                    <Menu.Item icon={<UserOutlined />}>
+                        <Link to="/admin/nhanvien">Nhân Viên</Link>
+                    </Menu.Item>
                 </Menu>
             </div>
         );

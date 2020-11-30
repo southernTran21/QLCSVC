@@ -1,4 +1,4 @@
-.categories {
+.account {
     &__top {
         background-color: #fff;
         height: 5rem;
@@ -64,7 +64,7 @@
 
         &__column {
             &--1 {
-                width: 10%;
+                width: 30%;
                 padding: 0 0.5rem;
             }
             &--2 {
@@ -72,7 +72,7 @@
                 padding: 0 0.5rem;
             }
             &--3 {
-                width: 40%;
+                width: 20%;
                 padding: 0 0.5rem;
             }
             &--4 {

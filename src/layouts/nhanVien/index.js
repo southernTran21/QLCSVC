@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component } from 'react'
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { Popconfirm, message } from "antd";
@@ -6,88 +6,86 @@ import { PlusOutlined, DeleteOutlined } from "@ant-design/icons";
 
 const text = "Bạn có chắc muốn xoá?";
 
-class Categories extends Component {
+export default class NhanVien extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            categories: [],
+            nhanVien: [],
         };
     }
 
     componentDidMount() {
         axios
-            .get("http://localhost:3001/categories")
+            .get("http://localhost:3001/nhanvien")
             .then((response) => {
-                this.setState({ categories: response.data });
+                this.setState({ nhanVien: response.data });
             })
             .catch((error) => {
                 console.log(error);
             });
     }
-
-    deleteCategory = (id) => {
+    deleteNV = (id) => {
         console.log(id)
         axios
-            .delete("http://localhost:3001/categories/delete/" + id)
+            .delete("http://localhost:3001/nhanvien/delete/" + id)
             .then((res) => message.success("Deleted"));
         this.setState({
-            categories: this.state.categories.filter(
+            nhanvien: this.state.nhanvien.filter(
                 (result) => result.ID !== id
             ),
         });
     };
-
     render() {
-        const { categories } = this.state;
+        const {nhanVien} = this.state
         return (
-            <div className="categories">
-                <div className="categories__top">
-                    <span className="categories__title">Loại Tài Sản</span>
-                    <div className="categories__right">
-                        <div className="categories__button">
+            <div className="nv">
+                <div className="nv__top">
+                    <span className="nv__title">Quản Lý Nhân Viên</span>
+                    <div className="nv__right">
+                        <div className="nv__button">
                             <PlusOutlined />
-                            <Link to="/admin/categories-add">
-                                <span className="categories__button__text">
+                            <Link to="/admin/nhanvien-add">
+                                <span className="nv__button__text">
                                     Thêm mới
                                 </span>
                             </Link>
                         </div>
                     </div>
                 </div>
-                <div className="categories__table">
-                    <div className="categories__table__header">
-                        <div className="categories__table__column--1">ID</div>
-                        <div className="categories__table__column--2">Tên</div>
-                        <div className="categories__table__column--3">
-                            Mô Tả
+                <div className="nv__table">
+                    <div className="nv__table__header">
+                        <div className="nv__table__column--1">Tên Nhân Viên</div>
+                        <div className="nv__table__column--2">Số Điện Thoại</div>
+                        <div className="nv__table__column--3">
+                            Địa Chỉ
                         </div>
-                        <div className="categories__table__column--4">
+                        <div className="nv__table__column--4">
                             Hành Động
                         </div>
                     </div>
-                    <div className="categories__table__body--wrapper">
-                        {categories.map((result, index) => {
+                    <div className="nv__table__body--wrapper">
+                        {nhanVien.map((result, index) => {
                             if (result != null) {
                                 return (
                                     <div
-                                        className="categories__table__body"
+                                        className="nv__table__body"
                                         key={index}
                                     >
-                                        <div className="categories__table__column--1">
-                                            {result.ID}
+                                        <div className="nv__table__column--1">
+                                            {result.tenNV}
                                         </div>
-                                        <div className="categories__table__column--2">
-                                            {result.name}
+                                        <div className="nv__table__column--2">
+                                            {result.soDienThoai}
                                         </div>
-                                        <div className="categories__table__column--3">
-                                            {result.description}
+                                        <div className="nv__table__column--3">
+                                            {result.diaChi}
                                         </div>
-                                        <div className="categories__table__column--4">
+                                        <div className="nv__table__column--4">
                                             <Popconfirm
                                                 placement="top"
                                                 title={text}
                                                 onConfirm={() => {
-                                                    this.deleteCategory(
+                                                    this.deleteNV(
                                                         result.ID
                                                     );
                                                 }}
@@ -106,8 +104,6 @@ class Categories extends Component {
                     </div>
                 </div>
             </div>
-        );
+        )
     }
 }
-
-export default Categories;

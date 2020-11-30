@@ -7,7 +7,11 @@ import LoginPage from "./layouts/login";
 import SideBar from "./components/sidebar";
 import HomeAdmin from "./layouts/home";
 import Categories from "./layouts/categories";
-import CategoriesAdd from "./layouts/categoriesAdd";
+import CategoriesAdd from "./layouts/categories/categoriesAdd";
+import Account from "./layouts/account";
+import AccountAdd from "./layouts/account/accountAdd";
+import NhanVien from "./layouts/nhanVien";
+import NhanVienAdd from "./layouts/nhanVien/nhanVienAdd";
 
 class App extends Component {
     render() {
@@ -49,6 +53,26 @@ class App extends Component {
                                                 path={`/admin/categories-add`}
                                                 exact
                                                 component={CategoriesAdd}
+                                            />
+                                            <Route
+                                                path={`/admin/account`}
+                                                exact
+                                                component={Account}
+                                            />
+                                            <Route
+                                                path={`/admin/account-add`}
+                                                exact
+                                                component={AccountAdd}
+                                            />
+                                            <Route
+                                                path={`/admin/nhanvien`}
+                                                exact
+                                                component={NhanVien}
+                                            />
+                                            <Route
+                                                path={`/admin/nhanvien-add`}
+                                                exact
+                                                component={NhanVienAdd}
                                             />
                                         </div>
                                     </div>

@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component } from 'react'
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { Popconfirm, message } from "antd";
@@ -6,88 +6,86 @@ import { PlusOutlined, DeleteOutlined } from "@ant-design/icons";
 
 const text = "Bạn có chắc muốn xoá?";
 
-class Categories extends Component {
+export default class Account extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            categories: [],
+            account: [],
         };
     }
 
     componentDidMount() {
         axios
-            .get("http://localhost:3001/categories")
+            .get("http://localhost:3001/account")
             .then((response) => {
-                this.setState({ categories: response.data });
+                this.setState({ account: response.data });
             })
             .catch((error) => {
                 console.log(error);
             });
     }
-
-    deleteCategory = (id) => {
+    deleteAccount = (id) => {
         console.log(id)
         axios
-            .delete("http://localhost:3001/categories/delete/" + id)
+            .delete("http://localhost:3001/account/delete/" + id)
             .then((res) => message.success("Deleted"));
         this.setState({
-            categories: this.state.categories.filter(
+            account: this.state.account.filter(
                 (result) => result.ID !== id
             ),
         });
     };
-
     render() {
-        const { categories } = this.state;
+        const { account } = this.state
         return (
-            <div className="categories">
-                <div className="categories__top">
-                    <span className="categories__title">Loại Tài Sản</span>
-                    <div className="categories__right">
-                        <div className="categories__button">
+            <div className="account">
+                <div className="account__top">
+                    <span className="account__title">Tài Khoản</span>
+                    <div className="account__right">
+                        <div className="account__button">
                             <PlusOutlined />
-                            <Link to="/admin/categories-add">
-                                <span className="categories__button__text">
+                            <Link to="/admin/account-add">
+                                <span className="account__button__text">
                                     Thêm mới
                                 </span>
                             </Link>
                         </div>
                     </div>
                 </div>
-                <div className="categories__table">
-                    <div className="categories__table__header">
-                        <div className="categories__table__column--1">ID</div>
-                        <div className="categories__table__column--2">Tên</div>
-                        <div className="categories__table__column--3">
-                            Mô Tả
+                <div className="account__table">
+                    <div className="account__table__header">
+                        <div className="account__table__column--1">Username</div>
+                        <div className="account__table__column--2">Password</div>
+                        <div className="account__table__column--3">
+                            Quyền
                         </div>
-                        <div className="categories__table__column--4">
+                        <div className="account__table__column--4">
                             Hành Động
                         </div>
                     </div>
-                    <div className="categories__table__body--wrapper">
-                        {categories.map((result, index) => {
+                    <div className="account__table__body--wrapper">
+                        {account.map((result, index) => {
                             if (result != null) {
                                 return (
                                     <div
-                                        className="categories__table__body"
+                                        className="account__table__body"
                                         key={index}
                                     >
-                                        <div className="categories__table__column--1">
-                                            {result.ID}
+                                        <div className="account__table__column--1">
+                                            {result.username}
                                         </div>
-                                        <div className="categories__table__column--2">
-                                            {result.name}
+                                        <div className="account__table__column--2">
+                                            {result.password}
                                         </div>
-                                        <div className="categories__table__column--3">
-                                            {result.description}
+                                        <div className="account__table__column--3">
+                                            {result.idQuyen}
                                         </div>
-                                        <div className="categories__table__column--4">
+                                        <div className="account__table__column--4">
                                             <Popconfirm
                                                 placement="top"
                                                 title={text}
                                                 onConfirm={() => {
-                                                    this.deleteCategory(
+                                                    this.deleteAccount(
                                                         result.ID
                                                     );
                                                 }}
@@ -106,8 +104,6 @@ class Categories extends Component {
                     </div>
                 </div>
             </div>
-        );
+        )
     }
 }
-
-export default Categories;

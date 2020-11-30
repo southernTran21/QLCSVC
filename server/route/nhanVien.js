@@ -2,7 +2,7 @@ const router = require("express").Router();
 const db = require("../connection");
 
 router.route("/").get((req, res) => {
-    let sql = "SELECT * FROM account";
+    let sql = "SELECT * FROM nhanvien";
     db.query(sql, (err, result) => {
         if (err) throw err;
         console.log("fetched");
@@ -11,25 +11,24 @@ router.route("/").get((req, res) => {
 });
 
 router.route("/add").post((req, res) => {
-    const {username, password,idQuyen} = req.body;
-    let sql = "INSERT INTO `account`(`username`, `password`, `idQuyen`) VALUES (?,?,?)";
-    db.query(sql, [username, password,idQuyen], (err, result) => {
+    const { tenNV, soDienThoai, diaChi } = req.body;
+    let sql =
+        "INSERT INTO `nhanvien`(`tenNV`, `soDienThoai`, `diaChi`) VALUES (?,?,?)";
+    db.query(sql, [tenNV, soDienThoai, diaChi], (err, result) => {
         if (err) throw err;
         console.log("added");
         res.json(result);
-    }
-    );
+    });
 });
 
 router.route("/delete/:ID").delete((req, res) => {
-    const {ID} = req.params;
-    let sql = "DELETE FROM `account` WHERE ID = ?";
+    const { ID } = req.params;
+    let sql = "DELETE FROM `nhanvien` WHERE ID = ?";
     db.query(sql, ID, (err, result) => {
         if (err) throw err;
         console.log("deleted");
         res.json(result);
-    }
-    );
+    });
 });
 
 module.exports = router;
