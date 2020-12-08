@@ -10,6 +10,15 @@ router.route("/").get((req, res) => {
     });
 });
 
+router.route("/getNameAccount").get((req, res) => {
+    let sql = "SELECT account.ID, username, tenQuyen FROM (`account` INNER JOIN `danhmucquyen` on account.idQuyen = danhmucquyen.ID)";
+    db.query(sql, (err, result) => {
+        if (err) throw err;
+        console.log("fetched");
+        res.json(result);
+    });
+});
+
 router.route("/add").post((req, res) => {
     const {username, password,idQuyen} = req.body;
     let sql = "INSERT INTO `account`(`username`, `password`, `idQuyen`) VALUES (?,?,?)";

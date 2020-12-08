@@ -11,10 +11,11 @@ router.route("/").get((req, res) => {
 });
 
 router.route("/add").post((req, res) => {
-    const { tenNV, soDienThoai, diaChi } = req.body;
+    const { tenNV, soDienThoai, diaChi, idAccount } = req.body;
+    console.log(soDienThoai)
     let sql =
-        "INSERT INTO `nhanvien`(`tenNV`, `soDienThoai`, `diaChi`) VALUES (?,?,?)";
-    db.query(sql, [tenNV, soDienThoai, diaChi], (err, result) => {
+        "INSERT INTO `nhanvien`(`tenNV`, `soDienThoai`, `diaChi`, `idAccount`) VALUES (?,?,?,?)";
+    db.query(sql, [tenNV, soDienThoai, diaChi, idAccount], (err, result) => {
         if (err) throw err;
         console.log("added");
         res.json(result);

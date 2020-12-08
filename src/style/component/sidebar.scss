@@ -65,4 +65,20 @@
         line-height: 0;
         height: 3rem;
     }
+    &__button-logout {
+        @include centerFlexBox();
+        color: white;
+        transition: all .5s ease-in-out;
+        margin: 0 2rem;
+        margin-top: 5rem;
+        font-size: 1.8rem;
+        border-radius: 7px;
+        cursor: pointer;
+        :nth-child(2){
+            margin-left: .7rem;
+        }
+        &:hover {
+            color: #1890ff;
+        }
+    }
 }

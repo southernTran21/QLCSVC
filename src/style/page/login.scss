@@ -59,13 +59,16 @@
         text-align: center;
     }
     &__input {
-        font-size: 2rem;
-        border-radius: 30px;
-        padding: 1rem 1.5rem;
+        font-size: 2rem !important;
+        border-radius: 30px !important;
+        padding: 1rem 1.5rem !important;
         outline: none;
         box-shadow: none;
-        margin-top: 2rem;
-        width: 30rem;
+        margin-top: 2rem !important;
+        width: 30rem !important;
+        input{
+            font-size: 2rem;
+        }
     }
     &__button {
         background-color: #1FCC44;

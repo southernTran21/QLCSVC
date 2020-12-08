@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { Popconfirm, message } from "antd";
@@ -25,18 +25,16 @@ export default class NhanVien extends Component {
             });
     }
     deleteNV = (id) => {
-        console.log(id)
+        console.log(id);
         axios
             .delete("http://localhost:3001/nhanvien/delete/" + id)
             .then((res) => message.success("Deleted"));
         this.setState({
-            nhanvien: this.state.nhanvien.filter(
-                (result) => result.ID !== id
-            ),
+            nhanVien: this.state.nhanVien.filter((result) => result.ID !== id),
         });
     };
     render() {
-        const {nhanVien} = this.state
+        const { nhanVien } = this.state;
         return (
             <div className="nv">
                 <div className="nv__top">
@@ -54,17 +52,19 @@ export default class NhanVien extends Component {
                 </div>
                 <div className="nv__table">
                     <div className="nv__table__header">
-                        <div className="nv__table__column--1">Tên Nhân Viên</div>
-                        <div className="nv__table__column--2">Số Điện Thoại</div>
-                        <div className="nv__table__column--3">
-                            Địa Chỉ
+                        <div className="nv__table__column--1">
+                            Tên Nhân Viên
                         </div>
-                        <div className="nv__table__column--4">
-                            Hành Động
+                        <div className="nv__table__column--2">
+                            Số Điện Thoại
                         </div>
+                        <div className="nv__table__column--3">Địa Chỉ</div>
+                        <div className="nv__table__column--4">Mã Tài Khoản</div>
+                        <div className="nv__table__column--5">Hành Động</div>
                     </div>
                     <div className="nv__table__body--wrapper">
                         {nhanVien.map((result, index) => {
+                            console.log(result);
                             if (result != null) {
                                 return (
                                     <div
@@ -81,13 +81,14 @@ export default class NhanVien extends Component {
                                             {result.diaChi}
                                         </div>
                                         <div className="nv__table__column--4">
+                                            {result.idAccount}
+                                        </div>
+                                        <div className="nv__table__column--5">
                                             <Popconfirm
                                                 placement="top"
                                                 title={text}
                                                 onConfirm={() => {
-                                                    this.deleteNV(
-                                                        result.ID
-                                                    );
+                                                    this.deleteNV(result.ID);
                                                 }}
                                                 okText="Yes"
                                                 cancelText="No"
@@ -104,6 +105,6 @@ export default class NhanVien extends Component {
                     </div>
                 </div>
             </div>
-        )
+        );
     }
 }

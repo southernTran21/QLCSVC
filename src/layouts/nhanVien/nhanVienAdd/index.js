@@ -3,7 +3,8 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 
 import { LeftCircleOutlined } from "@ant-design/icons";
-import { Input } from "antd";
+import { Input, Select } from "antd";
+const { Option } = Select;
 
 export default class NhanVienAdd extends Component {
     constructor(props) {
@@ -12,7 +13,19 @@ export default class NhanVienAdd extends Component {
             tenNV: "",
             soDienThoai: "",
             diaChi: "",
+            account: [],
+            idAccount: "",
         };
+    }
+    componentDidMount() {
+        axios
+            .get("http://localhost:3001/account/getNameAccount")
+            .then((response) => {
+                this.setState({ account: response.data });
+            })
+            .catch((error) => {
+                console.log(error);
+            });
     }
 
     onChangeName = (e) => {
@@ -22,6 +35,7 @@ export default class NhanVienAdd extends Component {
     };
 
     onChangeSoDienThoai = (e) => {
+        console.log(e.target.value)
         this.setState({
             soDienThoai: e.target.value,
         });
@@ -34,24 +48,32 @@ export default class NhanVienAdd extends Component {
     };
 
     onSubmit = (e) => {
-        const { tenNV, soDienThoai, diaChi } = this.state;
+        const { tenNV, soDienThoai, diaChi, idAccount } = this.state;
+        console.log(soDienThoai)
         axios.post("http://localhost:3001/nhanvien/add", {
             tenNV: tenNV,
             soDienThoai: soDienThoai,
             diaChi: diaChi,
+            idAccount: idAccount,
+        });
+    };
+
+    handleChangeAccount = (value) => {
+        this.setState({
+            idAccount: value,
         });
     };
 
     render() {
+        const { account } = this.state;
+        console.log(account);
         return (
             <div className="nhanvien-add">
                 <div className="nhanvien-add__top">
                     <Link to="/admin/nhanvien" className="nhanvien-add__icon">
                         <LeftCircleOutlined />
                     </Link>
-                    <span className="nhanvien-add__title">
-                        Thêm Nhân Viên
-                    </span>
+                    <span className="nhanvien-add__title">Thêm Nhân Viên</span>
                 </div>
                 <div className="nhanvien-add__body">
                     <div className="nhanvien-add__input">
@@ -74,6 +96,22 @@ export default class NhanVienAdd extends Component {
                             placeholder="Nhập Địa Chỉ"
                             onChange={this.onChangeDiaChi}
                         />
+                    </div>
+                    <div className="nhanvien-add__input">
+                        <span>Quyền</span>
+                        <Select
+                            style={{ width: 120 }}
+                            onChange={this.handleChangeAccount}
+                            placeholder="Chọn Tài Khoản"
+                        >
+                            {account.map((result, index) => {
+                                return (
+                                    <Option value={result.ID} key={index}>
+                                        {result.username} - {result.tenQuyen}
+                                    </Option>
+                                );
+                            })}
+                        </Select>
                     </div>
                     <div
                         className="nhanvien-add__button-submit"

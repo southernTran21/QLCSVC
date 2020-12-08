@@ -3,7 +3,6 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import { LeftCircleOutlined } from "@ant-design/icons";
 import { Input, Select } from "antd";
-const { TextArea } = Input;
 const { Option } = Select;
 
 export default class AccountAdd extends Component {

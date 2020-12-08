@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import { Menu } from "antd";
 import { Link } from "react-router-dom";
+import history from "../../history";
 import {
-    DesktopOutlined,
     UserOutlined,
     FundProjectionScreenOutlined,
-    IdcardOutlined,
+    LogoutOutlined,
 } from "@ant-design/icons";
 
 const { SubMenu } = Menu;
@@ -14,7 +14,7 @@ export default class SideBar extends Component {
     rootSubmenuKeys = ["sub1", "sub2", "sub4"];
 
     state = {
-        openKeys: ["sub1"],
+        openKeys: ["sub"],
     };
 
     onOpenChange = (openKeys) => {
@@ -28,6 +28,12 @@ export default class SideBar extends Component {
                 openKeys: latestOpenKey ? [latestOpenKey] : [],
             });
         }
+    };
+    handleDeleteLocalStorage = () => {
+        localStorage.removeItem("displayName");
+        localStorage.removeItem("accountType");
+        history.push("/");
+        window.location.reload();
     };
 
     render() {
@@ -46,6 +52,9 @@ export default class SideBar extends Component {
                     <Menu.Item icon={<UserOutlined />}>
                         <Link to="/admin">Trang Chủ</Link>
                     </Menu.Item>
+                    <Menu.Item icon={<UserOutlined />}>
+                        <Link to="/admin/categories">Loại Tài Sản</Link>
+                    </Menu.Item>
                     <SubMenu
                         icon={<FundProjectionScreenOutlined />}
                         title="Tài Sản"
@@ -55,16 +64,28 @@ export default class SideBar extends Component {
                         <Menu.Item key="2">Tôi Quản Lý</Menu.Item>
                         <Menu.Item key="3">Tôi Sử Dụng</Menu.Item>
                     </SubMenu>
-                    <Menu.Item icon={<UserOutlined />}>
-                        <Link to="/admin/categories">Loại Tài Sản</Link>
-                    </Menu.Item>
-                    <Menu.Item icon={<UserOutlined />}>
-                        <Link to="/admin/account">Tài Khoản</Link>
-                    </Menu.Item>
-                    <Menu.Item icon={<UserOutlined />}>
-                        <Link to="/admin/nhanvien">Nhân Viên</Link>
-                    </Menu.Item>
+                    <SubMenu
+                        icon={<FundProjectionScreenOutlined />}
+                        title="Quản Lý Tài Khoản"
+                        key="sub2"
+                    >
+                        <Menu.Item key="4">
+                            <Link to="/admin/account">Tài Khoản</Link>
+                        </Menu.Item>
+                        <Menu.Item key="5">
+                            <Link to="/admin/nhanvien">Nhân Viên</Link>
+                        </Menu.Item>
+                    </SubMenu>
                 </Menu>
+                <div
+                    className="sidebar__button-logout"
+                    onClick={() => {
+                        this.handleDeleteLocalStorage();
+                    }}
+                >
+                    <span>LOGOUT</span>
+                    <LogoutOutlined />
+                </div>
             </div>
         );
     }
