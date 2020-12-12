@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { Popconfirm, message } from "antd";
@@ -25,18 +25,16 @@ export default class Account extends Component {
             });
     }
     deleteAccount = (id) => {
-        console.log(id)
+        console.log(id);
         axios
             .delete("http://localhost:3001/account/delete/" + id)
             .then((res) => message.success("Deleted"));
         this.setState({
-            account: this.state.account.filter(
-                (result) => result.ID !== id
-            ),
+            account: this.state.account.filter((result) => result.ID !== id),
         });
     };
     render() {
-        const { account } = this.state
+        const { account } = this.state;
         return (
             <div className="account">
                 <div className="account__top">
@@ -54,12 +52,15 @@ export default class Account extends Component {
                 </div>
                 <div className="account__table">
                     <div className="account__table__header">
-                        <div className="account__table__column--1">Username</div>
-                        <div className="account__table__column--2">Password</div>
-                        <div className="account__table__column--3">
-                            Quyền
+                        <div className="account__table__column--1">
+                            Username
                         </div>
-                        <div className="account__table__column--4">
+                        <div className="account__table__column--2">
+                            Password
+                        </div>
+                        <div className="account__table__column--3">Quyền</div>
+                        <div className="account__table__column--4">Tên Hiển Thị</div>
+                        <div className="account__table__column--5">
                             Hành Động
                         </div>
                     </div>
@@ -81,6 +82,9 @@ export default class Account extends Component {
                                             {result.idQuyen}
                                         </div>
                                         <div className="account__table__column--4">
+                                            {result.displayName}
+                                        </div>
+                                        <div className="account__table__column--5">
                                             <Popconfirm
                                                 placement="top"
                                                 title={text}
@@ -104,6 +108,6 @@ export default class Account extends Component {
                     </div>
                 </div>
             </div>
-        )
+        );
     }
 }

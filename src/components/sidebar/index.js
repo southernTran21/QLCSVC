@@ -32,16 +32,18 @@ export default class SideBar extends Component {
     handleDeleteLocalStorage = () => {
         localStorage.removeItem("displayName");
         localStorage.removeItem("accountType");
+        localStorage.removeItem("idAccount");
         history.push("/");
         window.location.reload();
     };
 
     render() {
+        const displayName = localStorage.getItem("displayName");
         return (
             <div className="sidebar">
                 <div className="sidebar__information">
                     <div className="sidebar__avatar"></div>
-                    <p className="sidebar__name">ADMIN</p>
+                    <p className="sidebar__name">{displayName || ""}</p>
                 </div>
                 <Menu
                     mode="inline"
@@ -60,7 +62,7 @@ export default class SideBar extends Component {
                         title="Tài Sản"
                         key="sub1"
                     >
-                        <Menu.Item key="1">Tất Cả Tài Sản</Menu.Item>
+                        <Menu.Item key="1"><Link to="/admin/taisan">Tất Cả Tài Sản</Link></Menu.Item>
                         <Menu.Item key="2">Tôi Quản Lý</Menu.Item>
                         <Menu.Item key="3">Tôi Sử Dụng</Menu.Item>
                     </SubMenu>

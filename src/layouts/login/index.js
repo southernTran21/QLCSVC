@@ -56,6 +56,10 @@ class LoginPage extends Component {
                         "accountType",
                         usernameConfirm.idQuyen
                     );
+                    localStorage.setItem(
+                        "displayName",
+                        usernameConfirm.displayName
+                    );
                     history.push("/admin");
                     window.location.reload();
                 } else message.error("Mật Khẩu Không Được Để Trống!!!!");

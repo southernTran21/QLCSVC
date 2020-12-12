@@ -26,15 +26,18 @@ class Categories extends Component {
     }
 
     deleteCategory = (id) => {
-        console.log(id)
+        console.log(id);
         axios
             .delete("http://localhost:3001/categories/delete/" + id)
-            .then((res) => message.success("Deleted"));
-        this.setState({
-            categories: this.state.categories.filter(
-                (result) => result.ID !== id
-            ),
-        });
+            .then((res) => {
+                message.success("Deleted");
+                console.log(res);
+            });
+        // this.setState({
+        //     categories: this.state.categories.filter(
+        //         (result) => result.ID !== id
+        //     ),
+        // });
     };
 
     render() {
