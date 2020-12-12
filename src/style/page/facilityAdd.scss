@@ -1,0 +1,37 @@
+.facility-add {
+    &__body {
+        padding: 1rem;
+        @include flexBox();
+    }
+    &__left {
+        width: 50%;
+        padding-right: 1rem;
+    }
+    &__right {
+        width: 50%;
+        padding-left: 1rem;
+    }
+    .nhanvien-add__input .ant-select {
+        width: 100% !important;
+    }
+    .ant-picker {
+        margin: 1rem 0;
+    }
+    .ant-picker-input {
+        input {
+            margin: 0 !important;
+        }
+    }
+    &__button-submit {
+        @include flexBox(flex-end);
+        margin-right: 1rem;
+        span {
+            background-color: #222d32;
+            color: white;
+            @include centerFlexBox();
+            @include box(10rem, 3rem);
+            border-radius: 7px;
+            cursor: pointer;
+        }
+    }
+}

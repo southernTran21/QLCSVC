@@ -49,7 +49,6 @@ export default class NhanVienAdd extends Component {
 
     onSubmit = (e) => {
         const { tenNV, soDienThoai, diaChi, idAccount } = this.state;
-        console.log(soDienThoai)
         axios.post("http://localhost:3001/nhanvien/add", {
             tenNV: tenNV,
             soDienThoai: soDienThoai,

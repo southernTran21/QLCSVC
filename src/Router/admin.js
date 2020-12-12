@@ -9,6 +9,7 @@ import AccountAdd from "../layouts/account/accountAdd";
 import NhanVien from "../layouts/nhanVien";
 import NhanVienAdd from "../layouts/nhanVien/nhanVienAdd";
 import Facility from "../layouts/facility";
+import FacilityAdd from "../layouts/facility/facilityAdd";
 
 export default class Admin extends Component {
     handleInputURL = (accountType, match) => {
@@ -51,6 +52,11 @@ export default class Admin extends Component {
                             path={`${match}/taisan`}
                             exact
                             component={Facility}
+                        />
+                        <Route
+                            path={`${match}/taisan-add`}
+                            exact
+                            component={FacilityAdd}
                         />
                     </Fragment>
                 );
