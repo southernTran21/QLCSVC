@@ -3,7 +3,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 
 import { LeftCircleOutlined } from "@ant-design/icons";
-import { Input, Select, DatePicker } from "antd";
+import { Input, Select, DatePicker, message } from "antd";
 const { TextArea } = Input;
 const { Option } = Select;
 
@@ -103,16 +103,45 @@ export default class FacilityAdd extends Component {
             nguoiQuanLy,
             moTa,
         } = this.state;
-        axios.post("http://localhost:3001/facility/add", {
-            name: name,
-            idCat: idCat,
-            donViTinh: donViTinh,
-            ngayMua: ngayMua,
-            hanSuDung: hanSuDung,
-            giaTien: giaTien,
-            nguoiQuanLy: nguoiQuanLy,
-            moTa: moTa
-        });
+        if (
+            (name,
+            idCat,
+            donViTinh,
+            ngayMua,
+            hanSuDung,
+            giaTien,
+            nguoiQuanLy,
+            moTa == "")
+        ) {
+            message.error(
+                "Không được để dữ liệu trống. Vui lòng kiểm tra lại!!!!!!!!"
+            );
+        } else {
+            axios
+                .post("http://localhost:3001/facility/add", {
+                    name: name,
+                    idCat: idCat,
+                    donViTinh: donViTinh,
+                    ngayMua: ngayMua,
+                    hanSuDung: hanSuDung,
+                    giaTien: giaTien,
+                    nguoiQuanLy: nguoiQuanLy,
+                    moTa: moTa,
+                })
+                .then((res) => {
+                    message.success("Đã Lưu");
+                    this.setState({
+                        name: "",
+                        idCat: "",
+                        donViTinh: "",
+                        ngayMua: "",
+                        hanSuDung: "",
+                        giaTien: "",
+                        nguoiQuanLy: "",
+                        moTa: "",
+                    });
+                });
+        }
     };
 
     render() {

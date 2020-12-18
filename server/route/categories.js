@@ -9,6 +9,15 @@ router.route("/").get((req, res) => {
         res.json(result);
     });
 });
+router.route("/:ID").get((req, res) => {
+    const {ID} = req.params;
+    let sql = "SELECT * FROM categories where ID = ?";
+    db.query(sql, ID, (err, result) => {
+        if (err) throw err;
+        console.log("fetched");
+        res.json(result);
+    });
+});
 
 router.route("/add").post((req, res) => {
     const { name, description } = req.body;
@@ -19,6 +28,8 @@ router.route("/add").post((req, res) => {
         res.json(result);
     });
 });
+
+
 
 router.route("/delete/:ID").delete((req, res) => {
     const { ID } = req.params;

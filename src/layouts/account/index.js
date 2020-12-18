@@ -28,10 +28,17 @@ export default class Account extends Component {
         console.log(id);
         axios
             .delete("http://localhost:3001/account/delete/" + id)
-            .then((res) => message.success("Deleted"));
-        this.setState({
-            account: this.state.account.filter((result) => result.ID !== id),
-        });
+            .then((res) => {
+                if (res.data == "Error") {
+                    message.error("Vui Lòng Kiểm Tra lại Thông Tin Cần Xoá");
+                } else {
+                    message.success("Deleted");
+                    this.setState({
+                        account: this.state.account.filter((result) => result.ID !== id),
+                    });
+                }
+            });
+        
     };
     render() {
         const { account } = this.state;
@@ -59,7 +66,9 @@ export default class Account extends Component {
                             Password
                         </div>
                         <div className="account__table__column--3">Quyền</div>
-                        <div className="account__table__column--4">Tên Hiển Thị</div>
+                        <div className="account__table__column--4">
+                            Tên Hiển Thị
+                        </div>
                         <div className="account__table__column--5">
                             Hành Động
                         </div>
@@ -73,7 +82,15 @@ export default class Account extends Component {
                                         key={index}
                                     >
                                         <div className="account__table__column--1">
-                                            {result.username}
+                                            <Link
+                                                to={{
+                                                    pathname:
+                                                        "/admin/account-edit",
+                                                    search: `?id=${result.ID}`,
+                                                }}
+                                            >
+                                                {result.username}
+                                            </Link>
                                         </div>
                                         <div className="account__table__column--2">
                                             {result.password}

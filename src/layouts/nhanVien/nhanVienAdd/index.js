@@ -3,7 +3,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 
 import { LeftCircleOutlined } from "@ant-design/icons";
-import { Input, Select } from "antd";
+import { Input, Select, message } from "antd";
 const { Option } = Select;
 
 export default class NhanVienAdd extends Component {
@@ -35,7 +35,7 @@ export default class NhanVienAdd extends Component {
     };
 
     onChangeSoDienThoai = (e) => {
-        console.log(e.target.value)
+        console.log(e.target.value);
         this.setState({
             soDienThoai: e.target.value,
         });
@@ -49,12 +49,28 @@ export default class NhanVienAdd extends Component {
 
     onSubmit = (e) => {
         const { tenNV, soDienThoai, diaChi, idAccount } = this.state;
-        axios.post("http://localhost:3001/nhanvien/add", {
-            tenNV: tenNV,
-            soDienThoai: soDienThoai,
-            diaChi: diaChi,
-            idAccount: idAccount,
-        });
+        if ((tenNV, soDienThoai, diaChi, idAccount == "")) {
+            message.error(
+                "Không được để dữ liệu trống. Vui lòng kiểm tra lại!!!!!!!!"
+            );
+        } else {
+            axios
+                .post("http://localhost:3001/nhanvien/add", {
+                    tenNV: tenNV,
+                    soDienThoai: soDienThoai,
+                    diaChi: diaChi,
+                    idAccount: idAccount,
+                })
+                .then((res) => {
+                    message.success("Đã Lưu");
+                    this.setState({
+                        tenNV: "",
+                        soDienThoai: "",
+                        diaChi: "",
+                        idAccount: "",
+                    });
+                });
+        }
     };
 
     handleChangeAccount = (value) => {

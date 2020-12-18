@@ -3,7 +3,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 
 import { LeftCircleOutlined } from "@ant-design/icons";
-import { Input } from "antd";
+import { Input, message } from "antd";
 const { TextArea } = Input;
 
 export default class CategoriesAdd extends Component {
@@ -29,10 +29,24 @@ export default class CategoriesAdd extends Component {
 
     onSubmit = (e) => {
         const { name, description } = this.state;
-        axios.post("http://localhost:3001/categories/add", {
-            name: name,
-            description: description,
-        });
+        if ((name, description == "")) {
+            message.error(
+                "Không được để dữ liệu trống. Vui lòng kiểm tra lại!!!!!!!!"
+            );
+        } else {
+            axios
+                .post("http://localhost:3001/categories/add", {
+                    name: name,
+                    description: description,
+                })
+                .then((res) => {
+                    message.success("Đã Lưu");
+                    this.setState({
+                        name: "",
+                        description: "",
+                    });
+                });
+        }
     };
 
     render() {
@@ -65,7 +79,10 @@ export default class CategoriesAdd extends Component {
                             onChange={this.onChangeDesc}
                         />
                     </div>
-                    <div className="categories-add__button-submit" onClick={this.onSubmit}>
+                    <div
+                        className="categories-add__button-submit"
+                        onClick={this.onSubmit}
+                    >
                         Xác Nhận
                     </div>
                 </div>
