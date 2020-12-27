@@ -28,32 +28,144 @@
         background-color: #fff;
         margin: 1rem;
         min-height: 90vh;
-        .ant-table-measure-row{
+        .ant-table-measure-row {
             display: none;
         }
-        .ant-table-tbody, .ant-table-thead{
+        .ant-table-tbody,
+        .ant-table-thead {
             font-size: 1.4rem;
         }
-        .ant-table-pagination.ant-pagination{
+        .ant-table-pagination.ant-pagination {
             margin: 1rem 0;
         }
-        .ant-table-cell-fix-right-first{
+        .ant-table-cell-fix-right-first {
             text-align: center;
         }
-        .ant-table-thead > tr > th, .ant-table-tbody > tr > td, .ant-table tfoot > tr > th, .ant-table tfoot > tr > td{
+        .ant-table-thead > tr > th,
+        .ant-table-tbody > tr > td,
+        .ant-table tfoot > tr > th,
+        .ant-table tfoot > tr > td {
             padding: 1rem;
         }
-        .iconDelete{
+        .iconDelete {
             @include box(3rem);
             @include centerFlexBox();
             cursor: pointer;
             border-radius: 50%;
-            transition: .5s all ease-in-out;
+            transition: 0.5s all ease-in-out;
             margin: 0 auto;
         }
-        .iconDelete:hover{
+        .iconDelete:hover {
             background-color: #222d32;
             color: white;
         }
+        .QRCODE {
+            svg {
+                width: 7rem !important;
+                height: 7rem !important;
+            }
+        }
+    }
+    &__table {
+        overflow-y: hidden;
+        overflow-x: scroll;
+        font-size: 1.3rem;
+        &-head,
+        &-body {
+            width: max-content;
+        }
+        &-head {
+            background-color: #e0e0e0;
+            @include flexBox(flex-start, stretch);
+            align-content: center;
+        }
+        &-body {
+            min-height: 65vh;
+            max-height: 65vh;
+            overflow-y: scroll;
+        }
+        &-item {
+            @include flexBox(flex-start, stretch);
+            align-content: center;
+            border-bottom: .1px solid rgb(185, 185, 185);
+            transition: 0.25s all ease-in-out;
+            &:hover {
+                background-color: #f0f0f0;
+            }
+        }
+    }
+    &__column {
+        border-right: 1px solid black;
+        &1 {
+            width: 30rem;
+            padding: 1rem;
+        }
+        &2 {
+            width: 20rem;
+            padding: 1rem;
+        }
+        &3 {
+            width: 20rem;
+            padding: 1rem;
+        }
+        &4 {
+            width: 20rem;
+            padding: 1rem;
+        }
+        &5 {
+            width: 20rem;
+            padding: 1rem;
+        }
+        &6 {
+            width: 20rem;
+            padding: 1rem;
+        }
+        &7 {
+            width: 20rem;
+            padding: 1rem;
+        }
+        &8 {
+            width: 20rem;
+            padding: 1rem;
+        }
+        &9 {
+            width: 20rem;
+            padding: 1rem;
+        }
+        &10 {
+            width: 20rem;
+            padding: 1rem;
+        }
+        &11 {
+            width: 20rem;
+            padding: 1rem;
+        }
+        &12 {
+            width: 13rem;
+            padding: 1rem;
+            text-align: center;
+        }
+    }
+    &__pagination {
+        @include centerFlexBox();
+        font-size: 1.8rem;
+        margin: 1.5rem 0;
+        button[disabled]{
+            background-color: #cccccc;
+            color: #666666;
+            cursor: no-drop;
+        }
+    }
+    &__button {
+        &-previous, &-next {
+            @include centerFlexBox();
+            background-color: #222d32;
+            color: white;
+            padding: .5rem 1rem;
+            border-radius: 7px;
+        }
+    }
+    &__count-pag {
+        margin: 0 1.5rem;
     }
 }

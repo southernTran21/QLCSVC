@@ -1,0 +1,17 @@
+.facility-add-excel{
+    height: 100%;
+    padding: 1rem;
+    &__input {
+        background-color: white;
+        padding: 1rem;
+    }
+    &__title {
+        font-size: 2rem;
+    }
+    &__input-file-excel {
+        margin-top: 1rem;
+    }
+    &__button-submit {
+        margin-top: 1rem;
+    }
+}

@@ -11,6 +11,8 @@ import NhanVienAdd from "../layouts/nhanVien/nhanVienAdd";
 import Facility from "../layouts/facility";
 import FacilityAdd from "../layouts/facility/facilityAdd";
 import AccountEdit from "../layouts/account/accountEdit";
+import CategoriesEdit from "../layouts/categories/categoriesEdit";
+import FacilityAddExcel from "../layouts/facility/facilityAddExcel";
 
 export default class Admin extends Component {
     handleInputURL = (accountType, match) => {
@@ -28,6 +30,11 @@ export default class Admin extends Component {
                             path={`${match}/categories-add`}
                             exact
                             component={CategoriesAdd}
+                        />
+                        <Route
+                            path={`${match}/categories-edit`}
+                            exact
+                            component={CategoriesEdit}
                         />
                         <Route
                             path={`${match}/account`}
@@ -64,6 +71,11 @@ export default class Admin extends Component {
                             exact
                             component={FacilityAdd}
                         />
+                        <Route
+                            path={`${match}/taisan-add-excel`}
+                            exact
+                            component={FacilityAddExcel}
+                        />
                     </Fragment>
                 );
             default:
@@ -88,6 +100,7 @@ export default class Admin extends Component {
                         style={{
                             width: "83%",
                             backgroundColor: "#f0f0f0",
+                            height:"100vh"
                         }}
                     >
                         {this.handleInputURL(accountType, match)}

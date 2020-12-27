@@ -30,14 +30,17 @@ class Categories extends Component {
         axios
             .delete("http://localhost:3001/categories/delete/" + id)
             .then((res) => {
-                message.success("Deleted");
-                console.log(res);
+                if (res.data == "Error") {
+                    message.error("Vui Lòng Kiểm Tra lại Thông Tin Cần Xoá");
+                } else {
+                    message.success("Deleted");
+                    this.setState({
+                        categories: this.state.categories.filter(
+                            (result) => result.ID !== id
+                        ),
+                    });
+                }
             });
-        // this.setState({
-        //     categories: this.state.categories.filter(
-        //         (result) => result.ID !== id
-        //     ),
-        // });
     };
 
     render() {
@@ -80,7 +83,15 @@ class Categories extends Component {
                                             {result.ID}
                                         </div>
                                         <div className="categories__table__column--2">
-                                            {result.name}
+                                            <Link
+                                                to={{
+                                                    pathname:
+                                                        "/admin/categories-edit",
+                                                    search: `?id=${result.ID}`,
+                                                }}
+                                            >
+                                                {result.name}
+                                            </Link>
                                         </div>
                                         <div className="categories__table__column--3">
                                             {result.description}

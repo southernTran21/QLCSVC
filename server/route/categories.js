@@ -29,7 +29,16 @@ router.route("/add").post((req, res) => {
     });
 });
 
-
+router.route("/edit/:ID").post((req, res) => {
+    const { ID } = req.params;
+    const { name, description } = req.body;
+    let sql = "UPDATE `categories` SET `name`= ?,`description`= ? WHERE ID = ?";
+    db.query(sql, [name, description, ID], (err, result) => {
+        if (err) throw err;
+        console.log("added");
+        res.json(result);
+    });
+});
 
 router.route("/delete/:ID").delete((req, res) => {
     const { ID } = req.params;
@@ -38,7 +47,7 @@ router.route("/delete/:ID").delete((req, res) => {
         "SELECT COUNT(idCat) as SL FROM `facility` WHERE idCat = ?";
     db.query(sqlFacility, ID, (err, result) => {
         if (result[0].SL > 0) {
-            res.send("Lỗi");
+            res.send("Error");
         } else {
             db.query(sql, ID, (err, result) => {
                 if (err) throw err;

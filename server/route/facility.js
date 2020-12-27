@@ -12,8 +12,64 @@ router.route("/").get((req, res) => {
 
 router.route("/getFacilityForCategory/:ID").get((req, res) => {
     const { ID } = req.params;
-    let sql = "SELECT * FROM facility where idCat = ?";
-    db.query(sql, ID, (err, result) => {
+    console.log(ID)
+    if (ID != "all") {
+        let sql =
+            "SELECT * FROM facility where idCat = ? ORDER BY id DESC limit 10 OFFSET 0";
+        let sqlGetCount =
+            "SELECT COUNT(*) as SL FROM `facility` where idCat = ? ";
+        db.query(sql, ID, (err, result) => {
+            if (err) throw err;
+            console.log("fetched");
+            db.query(sqlGetCount, ID, (err, count) => {
+                if (err) throw err;
+                res.json([
+                    result,
+                    count[0].SL - 1 < 10
+                        ? (sl = 1)
+                        : (sl = Math.floor((count[0].SL - 1) / 10) + 1),
+                ]);
+            });
+        });
+    } else {
+        let sql =
+            "SELECT * FROM facility ORDER BY id DESC limit 10 OFFSET 0";
+        let sqlGetCount =
+            "SELECT COUNT(*) as SL FROM `facility` ";
+        db.query(sql, (err, result) => {
+            if (err) throw err;
+            console.log("fetched");
+            db.query(sqlGetCount, (err, count) => {
+                if (err) throw err;
+                res.json([
+                    result,
+                    count[0].SL - 1 < 10
+                        ? (sl = 1)
+                        : (sl = Math.floor((count[0].SL - 1) / 10) + 1),
+                ]);
+            });
+        });
+    }
+});
+
+router.route("/getCountPagination").get((req, res) => {
+    let sql = "SELECT COUNT(*) as SL FROM `facility`";
+    let sl = 0;
+    db.query(sql, (err, result) => {
+        result[0].SL - 1 < 10
+            ? (sl = 1)
+            : (sl = Math.floor((result[0].SL - 1) / 10) + 1);
+        console.log(result);
+        console.log(sl);
+    });
+});
+
+router.route("/getFacilityPagination/:page").get((req, res) => {
+    const { page } = req.params;
+    const max = page * 10;
+    const min = max - 10;
+    let sql = "Select * from facility ORDER BY id DESC limit ? OFFSET ?";
+    db.query(sql, [max, min], (err, result) => {
         if (err) throw err;
         console.log("fetched");
         res.json(result);
@@ -42,12 +98,12 @@ router.route("/add").post((req, res) => {
     let seconds = date_ob.getSeconds();
 
     // current random
-    let random = Math.floor(Math.random() * Math.floor(9999))
+    let random = Math.floor(Math.random() * Math.floor(9999));
 
-    const ID = year+month+date+hours+minutes+seconds+random;
-    const QRCODE = year+month+date+hours+minutes+seconds+random;
-    const tinhTrang = 1
-    const nguoiSuDung = null
+    const ID = year + month + date + hours + minutes + seconds + random;
+    const QRCODE = year + month + date + hours + minutes + seconds + random;
+    const tinhTrang = 1;
+    const nguoiSuDung = null;
 
     const {
         name,

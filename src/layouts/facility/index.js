@@ -2,8 +2,14 @@ import React, { Component } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { Popconfirm, message, Tabs, Table } from "antd";
-import { PlusOutlined, DeleteOutlined } from "@ant-design/icons";
-
+import Pagination from "react-js-pagination";
+import {
+    PlusOutlined,
+    DeleteOutlined,
+    LeftOutlined,
+    RightOutlined,
+} from "@ant-design/icons";
+var QRCode = require("qrcode.react");
 const { TabPane } = Tabs;
 
 const textDelete = "Bạn có chắc muốn xoá?";
@@ -12,8 +18,10 @@ export default class Facility extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            pageCount: 0,
+            page: 1,
             categories: [],
-            facility: [
+            facilityCategories: [
                 {
                     ID: 0,
                     name: "",
@@ -29,7 +37,6 @@ export default class Facility extends Component {
                     moTa: "",
                 },
             ],
-            facilityCategories: [],
         };
     }
 
@@ -43,28 +50,18 @@ export default class Facility extends Component {
                 console.log(error);
             });
         axios
-            .get("http://localhost:3001/facility")
+            .get("http://localhost:3001/facility/getFacilityForCategory/all")
             .then((response) => {
-                this.setState({ facility: response.data });
+                this.setState({
+                    facilityCategories: response.data[0],
+                    pageCount: response.data[1],
+                    page: 1,
+                });
             })
             .catch((error) => {
                 console.log(error);
             });
     }
-
-    deleteCategory = (id) => {
-        axios
-            .delete("http://localhost:3001/facility/delete/" + id.key)
-            .then((res) => {
-                message.success("Deleted");
-                console.log(res);
-            });
-        this.setState({
-            facility: this.state.facility.filter(
-                (result) => result.ID !== id.key
-            ),
-        });
-    };
     deleteFacilityForCategory = (id) => {
         axios
             .delete("http://localhost:3001/facility/delete/" + id.key)
@@ -80,186 +77,90 @@ export default class Facility extends Component {
     };
 
     handleChangeDataFacilityForCategory = (key) => {
-        axios
-            .get("http://localhost:3001/facility/getFacilityForCategory/" + key)
-            .then((response) => {
-                this.setState({ facilityCategories: response.data });
-            })
-            .catch((error) => {
-                console.log(error);
-            });
+        if (key > 0) {
+            axios
+                .get(
+                    "http://localhost:3001/facility/getFacilityForCategory/" +
+                        key
+                )
+                .then((response) => {
+                    this.setState({
+                        facilityCategories: response.data[0],
+                        pageCount: response.data[1],
+                        page: 1,
+                    });
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        } else {
+            axios
+                .get(
+                    "http://localhost:3001/facility/getFacilityForCategory/all"
+                )
+                .then((response) => {
+                    this.setState({
+                        facilityCategories: response.data[0],
+                        pageCount: response.data[1],
+                        page: 1,
+                    });
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        }
+    };
+
+    showQRCODE = (result) => {
+        if (result !== "") {
+            return <QRCode value={result} renderAs="svg" />;
+        }
+    };
+
+    handleChangeDataPag = (page, key) => {
+        console.log(page);
+        if (page < 2 && key == 0) {
+            console.log(page);
+            this.handleChangeDataFacilityForCategory(0);
+        } else if (page < 2 && key > 0) {
+            console.log(page);
+            this.handleChangeDataFacilityForCategory(key);
+        } else {
+            axios
+                .get(
+                    "http://localhost:3001/facility/getFacilityPagination/" +
+                        page
+                )
+                .then((response) => {
+                    this.setState({
+                        facilityCategories: response.data,
+                    });
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        }
+    };
+
+    hiddenContentDescription = (description) => {
+        // console.log(description);
+        if (description.length > 100) {
+            const str = description.slice(0, 100);
+
+            return (
+                <div>
+                    <div className="contentDescription">
+                        <span>{str}... </span>
+                    </div>
+                </div>
+            );
+        } else {
+            return <span>{description}</span>;
+        }
     };
 
     render() {
-        const { categories, facility, facilityCategories } = this.state;
-
-        const dataFacilityAll = facility.map((result, index) => {
-            return {
-                key: result.ID,
-                name: result.name,
-                QRCODE: result.QRCODE,
-                idCat: result.idCat,
-                donViTinh: result.donViTinh,
-                ngayMua: result.ngayMua.split("T")[0],
-                hanSuDung: result.hanSuDung,
-                giaTien: result.giaTien,
-                nguoiSuDung: result.nguoiSuDung,
-                nguoiQuanLy: result.nguoiQuanLy,
-                tinhTrang: result.tinhTrang,
-                moTa: result.moTa,
-            };
-        });
-
-        const dataFacilityForCategory = facilityCategories.map((result, index) => {
-            return {
-                key: result.ID,
-                name: result.name,
-                QRCODE: result.QRCODE,
-                idCat: result.idCat,
-                donViTinh: result.donViTinh,
-                ngayMua: result.ngayMua.split("T")[0],
-                hanSuDung: result.hanSuDung,
-                giaTien: result.giaTien,
-                nguoiSuDung: result.nguoiSuDung,
-                nguoiQuanLy: result.nguoiQuanLy,
-                tinhTrang: result.tinhTrang,
-                moTa: result.moTa,
-            };
-        });
-
-        const columns = [
-            {
-                title: "Tên Tài Sản",
-                width: 250,
-                dataIndex: "name",
-                key: "name",
-                fixed: "left",
-                render: (text) => <a>{text}</a>
-            },
-            { title: "QRCODE", dataIndex: "QRCODE", key: "1", width: 200 },
-            { title: "Mã Loại", dataIndex: "idCat", key: "2", width: 200 },
-            {
-                title: "Đơn Vị Tính",
-                dataIndex: "donViTinh",
-                key: "3",
-                width: 200,
-            },
-            { title: "Ngày Mua", dataIndex: "ngayMua", key: "4", width: 200 },
-            {
-                title: "Hạn Sử Dụng",
-                dataIndex: "hanSuDung",
-                key: "5",
-                width: 200,
-            },
-            { title: "Giá Tiền", dataIndex: "giaTien", key: "6", width: 200 },
-            {
-                title: "Người Sử Dụng",
-                dataIndex: "nguoiSuDung",
-                key: "7",
-                width: 200,
-            },
-            {
-                title: "Người Quản Lý",
-                dataIndex: "nguoiQuanLy",
-                key: "8",
-                width: 200,
-            },
-            {
-                title: "Tình Trạng",
-                dataIndex: "tinhTrang",
-                key: "9",
-                width: 200,
-            },
-            { title: "Mô Tả", dataIndex: "moTa", key: "10", width: 200 },
-            {
-                title: "Action",
-                key: "operation",
-                fixed: "right",
-                width: 100,
-                render: (key) => (
-                    <Popconfirm
-                        placement="top"
-                        title={textDelete}
-                        onConfirm={() => {
-                            this.deleteCategory(key);
-                        }}
-                        okText="Yes"
-                        cancelText="No"
-                    >
-                        <div className="iconDelete">
-                            <DeleteOutlined />
-                        </div>
-                    </Popconfirm>
-                ),
-            },
-        ];
-        const columnsDataFacilityForCategory = [
-            {
-                title: "Tên Tài Sản",
-                width: 250,
-                dataIndex: "name",
-                key: "name",
-                fixed: "left",
-                render: (text) => <a>{text}</a>
-            },
-            { title: "QRCODE", dataIndex: "QRCODE", key: "1", width: 200 },
-            { title: "Mã Loại", dataIndex: "idCat", key: "2", width: 200 },
-            {
-                title: "Đơn Vị Tính",
-                dataIndex: "donViTinh",
-                key: "3",
-                width: 200,
-            },
-            { title: "Ngày Mua", dataIndex: "ngayMua", key: "4", width: 200 },
-            {
-                title: "Hạn Sử Dụng",
-                dataIndex: "hanSuDung",
-                key: "5",
-                width: 200,
-            },
-            { title: "Giá Tiền", dataIndex: "giaTien", key: "6", width: 200 },
-            {
-                title: "Người Sử Dụng",
-                dataIndex: "nguoiSuDung",
-                key: "7",
-                width: 200,
-            },
-            {
-                title: "Người Quản Lý",
-                dataIndex: "nguoiQuanLy",
-                key: "8",
-                width: 200,
-            },
-            {
-                title: "Tình Trạng",
-                dataIndex: "tinhTrang",
-                key: "9",
-                width: 200,
-            },
-            { title: "Mô Tả", dataIndex: "moTa", key: "10", width: 200 },
-            {
-                title: "Action",
-                key: "operation",
-                fixed: "right",
-                width: 100,
-                render: (key) => (
-                    <Popconfirm
-                        placement="top"
-                        title={textDelete}
-                        onConfirm={() => {
-                            this.deleteFacilityForCategory(key);
-                        }}
-                        okText="Yes"
-                        cancelText="No"
-                    >
-                        <div className="iconDelete">
-                            <DeleteOutlined />
-                        </div>
-                    </Popconfirm>
-                ),
-            },
-        ];
-
+        const { categories, facilityCategories, pageCount, page } = this.state;
         return (
             <div className="facility">
                 <div className="facility__top">
@@ -278,23 +179,340 @@ export default class Facility extends Component {
                 <div className="facility__content">
                     <Tabs
                         defaultActiveKey="0"
+                        defaultValue="0"
                         onChange={this.handleChangeDataFacilityForCategory}
                     >
                         <TabPane tab="Tất Cả" key="0">
-                            <Table
-                                columns={columns}
-                                dataSource={dataFacilityAll}
-                                scroll={{ x: 1300 }}
-                            />
+                            <div className="facility__table">
+                                <div className="facility__table-head">
+                                    <div className="facility__column1">
+                                        Tên Tài Sản
+                                    </div>
+                                    <div className="facility__column2">
+                                        QRCODE
+                                    </div>
+                                    <div className="facility__column3">
+                                        Mã Loại
+                                    </div>
+                                    <div className="facility__column4">
+                                        Đơn Vị Tính
+                                    </div>
+                                    <div className="facility__column5">
+                                        Ngày Mua
+                                    </div>
+                                    <div className="facility__column6">
+                                        Hạn Sử Dụng
+                                    </div>
+                                    <div className="facility__column7">
+                                        Giá Tiền
+                                    </div>
+                                    <div className="facility__column8">
+                                        Người Sử Dụng
+                                    </div>
+                                    <div className="facility__column9">
+                                        Người Quản Lý
+                                    </div>
+                                    <div className="facility__column10">
+                                        Tình Trạng
+                                    </div>
+                                    <div className="facility__column11">
+                                        Mô Tả
+                                    </div>
+                                    <div className="facility__column12">
+                                        Hành Động
+                                    </div>
+                                </div>
+                                <div className="facility__table-body">
+                                    {facilityCategories.map((item, index) => {
+                                        return (
+                                            <div
+                                                className="facility__table-item"
+                                                key={index}
+                                            >
+                                                <div className="facility__column1">
+                                                    <span>{item.name}</span>
+                                                </div>
+                                                <div className="facility__column2">
+                                                    <div className="QRCODE">
+                                                        {this.showQRCODE(
+                                                            item.QRCODE
+                                                        )}
+                                                    </div>
+                                                </div>
+                                                <div className="facility__column3">
+                                                    <span>{item.idCat}</span>
+                                                </div>
+                                                <div className="facility__column4">
+                                                    <span>
+                                                        {item.donViTinh}
+                                                    </span>
+                                                </div>
+                                                <div className="facility__column5">
+                                                    <span>
+                                                        {item.ngayMua.split(
+                                                            "T"
+                                                        )[0] || ""}
+                                                    </span>
+                                                </div>
+                                                <div className="facility__column6">
+                                                    <span>
+                                                        {item.hanSuDung}
+                                                    </span>
+                                                </div>
+                                                <div className="facility__column7">
+                                                    <span>{item.giaTien}</span>
+                                                </div>
+                                                <div className="facility__column8">
+                                                    <span>
+                                                        {item.nguoiSuDung}
+                                                    </span>
+                                                </div>
+                                                <div className="facility__column9">
+                                                    <span>
+                                                        {item.nguoiQuanLy}
+                                                    </span>
+                                                </div>
+                                                <div className="facility__column10">
+                                                    <span>
+                                                        {item.tinhTrang}
+                                                    </span>
+                                                </div>
+                                                <div className="facility__column11">
+                                                    <span>{this.hiddenContentDescription(item.moTa)}</span>
+                                                </div>
+                                                <div className="facility__column12">
+                                                    <Popconfirm
+                                                        placement="top"
+                                                        title={textDelete}
+                                                        onConfirm={() => {
+                                                            this.deleteCategory(
+                                                                item.ID
+                                                            );
+                                                        }}
+                                                        okText="Yes"
+                                                        cancelText="No"
+                                                    >
+                                                        <div className="iconDelete">
+                                                            <DeleteOutlined />
+                                                        </div>
+                                                    </Popconfirm>
+                                                </div>
+                                            </div>
+                                        );
+                                    })}
+                                </div>
+                            </div>
+                            <div className="facility__pagination">
+                                <button
+                                    className="facility__button-previous"
+                                    disabled={page <= 1}
+                                    onClick={() => {
+                                        this.handleChangeDataPag(page - 1, 0);
+                                        this.setState({
+                                            page: page - 1,
+                                        });
+                                    }}
+                                >
+                                    <LeftOutlined />
+                                </button>
+                                <div className="facility__count-pag">
+                                    {page} / {pageCount}
+                                </div>
+                                <button
+                                    className="facility__button-next"
+                                    disabled={page >= pageCount}
+                                    onClick={() => {
+                                        this.handleChangeDataPag(page + 1, 0);
+                                        this.setState({
+                                            page: page + 1,
+                                        });
+                                    }}
+                                >
+                                    <RightOutlined />
+                                </button>
+                            </div>
                         </TabPane>
                         {categories.map((result, index) => {
                             return (
                                 <TabPane tab={result.name} key={result.ID}>
-                                    <Table
-                                        columns={columnsDataFacilityForCategory}
-                                        dataSource={dataFacilityForCategory}
-                                        scroll={{ x: 1300 }}
-                                    />
+                                    <div className="facility__table">
+                                        <div className="facility__table-head">
+                                            <div className="facility__column1">
+                                                Tên Tài Sản
+                                            </div>
+                                            <div className="facility__column2">
+                                                QRCODE
+                                            </div>
+                                            <div className="facility__column3">
+                                                Mã Loại
+                                            </div>
+                                            <div className="facility__column4">
+                                                Đơn Vị Tính
+                                            </div>
+                                            <div className="facility__column5">
+                                                Ngày Mua
+                                            </div>
+                                            <div className="facility__column6">
+                                                Hạn Sử Dụng
+                                            </div>
+                                            <div className="facility__column7">
+                                                Giá Tiền
+                                            </div>
+                                            <div className="facility__column8">
+                                                Người Sử Dụng
+                                            </div>
+                                            <div className="facility__column9">
+                                                Người Quản Lý
+                                            </div>
+                                            <div className="facility__column10">
+                                                Tình Trạng
+                                            </div>
+                                            <div className="facility__column11">
+                                                Mô Tả
+                                            </div>
+                                            <div className="facility__column12">
+                                                Hành Động
+                                            </div>
+                                        </div>
+                                        <div className="facility__table-body">
+                                            {facilityCategories.map(
+                                                (item, index) => {
+                                                    return (
+                                                        <div
+                                                            className="facility__table-item"
+                                                            key={index}
+                                                        >
+                                                            <div className="facility__column1">
+                                                                <span>
+                                                                    {item.name}
+                                                                </span>
+                                                            </div>
+                                                            <div className="facility__column2">
+                                                                <div className="QRCODE">
+                                                                    {this.showQRCODE(
+                                                                        item.QRCODE
+                                                                    )}
+                                                                </div>
+                                                            </div>
+                                                            <div className="facility__column3">
+                                                                <span>
+                                                                    {item.idCat}
+                                                                </span>
+                                                            </div>
+                                                            <div className="facility__column4">
+                                                                <span>
+                                                                    {
+                                                                        item.donViTinh
+                                                                    }
+                                                                </span>
+                                                            </div>
+                                                            <div className="facility__column5">
+                                                                <span>
+                                                                    {item.ngayMua.split(
+                                                                        "T"
+                                                                    )[0] || ""}
+                                                                </span>
+                                                            </div>
+                                                            <div className="facility__column6">
+                                                                <span>
+                                                                    {
+                                                                        item.hanSuDung
+                                                                    }
+                                                                </span>
+                                                            </div>
+                                                            <div className="facility__column7">
+                                                                <span>
+                                                                    {
+                                                                        item.giaTien
+                                                                    }
+                                                                </span>
+                                                            </div>
+                                                            <div className="facility__column8">
+                                                                <span>
+                                                                    {
+                                                                        item.nguoiSuDung
+                                                                    }
+                                                                </span>
+                                                            </div>
+                                                            <div className="facility__column9">
+                                                                <span>
+                                                                    {
+                                                                        item.nguoiQuanLy
+                                                                    }
+                                                                </span>
+                                                            </div>
+                                                            <div className="facility__column10">
+                                                                <span>
+                                                                    {
+                                                                        item.tinhTrang
+                                                                    }
+                                                                </span>
+                                                            </div>
+                                                            <div className="facility__column11">
+                                                                <span>
+                                                                    {this.hiddenContentDescription(item.moTa)}
+                                                                </span>
+                                                            </div>
+                                                            <div className="facility__column12">
+                                                                <Popconfirm
+                                                                    placement="top"
+                                                                    title={
+                                                                        textDelete
+                                                                    }
+                                                                    onConfirm={() => {
+                                                                        this.deleteCategory(
+                                                                            item.ID
+                                                                        );
+                                                                    }}
+                                                                    okText="Yes"
+                                                                    cancelText="No"
+                                                                >
+                                                                    <div className="iconDelete">
+                                                                        <DeleteOutlined />
+                                                                    </div>
+                                                                </Popconfirm>
+                                                            </div>
+                                                        </div>
+                                                    );
+                                                }
+                                            )}
+                                        </div>
+                                    </div>
+                                    <div className="facility__pagination">
+                                        <button
+                                            className="facility__button-previous"
+                                            disabled={page <= 1}
+                                            onClick={() => {
+                                                this.handleChangeDataPag(
+                                                    page - 1,
+                                                    result.ID
+                                                );
+                                                this.setState({
+                                                    page: page - 1,
+                                                });
+                                            }}
+                                        >
+                                            <LeftOutlined />
+                                        </button>
+                                        <div className="facility__count-pag">
+                                            {page} / {pageCount}
+                                        </div>
+                                        <button
+                                            className="facility__button-next"
+                                            disabled={page >= pageCount}
+                                            onClick={() => {
+                                                this.handleChangeDataPag(
+                                                    page + 1,
+                                                    result.ID
+                                                );
+                                                this.setState({
+                                                    page: page + 1,
+                                                });
+                                            }}
+                                        >
+                                            <RightOutlined />
+                                        </button>
+                                    </div>
                                 </TabPane>
                             );
                         })}

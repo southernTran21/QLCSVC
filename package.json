@@ -11,12 +11,17 @@
     "mongoose": "^5.10.10",
     "mysql": "^2.18.1",
     "node-sass": "^4.14.1",
+    "qrcode": "^1.4.4",
+    "qrcode.react": "^1.0.0",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
     "react-highlight-words": "^0.16.0",
+    "react-js-pagination": "^3.0.3",
+    "react-paginate": "^6.5.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "^3.4.4",
-    "sass": "^1.27.0"
+    "sass": "^1.27.0",
+    "xlsx": "^0.16.9"
   },
   "scripts": {
     "start": "react-scripts start",
