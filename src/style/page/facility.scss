@@ -20,6 +20,10 @@
         &:nth-child(1) {
             background-color: rgb(0, 190, 0);
         }
+        &:nth-child(2) {
+            background-color: rgb(255, 0, 0);
+            margin-left: 1rem;
+        }
     }
     &__right {
         @include flexBox(flex-start, center, row);
@@ -133,14 +137,6 @@
             padding: 1rem;
         }
         &10 {
-            width: 20rem;
-            padding: 1rem;
-        }
-        &11 {
-            width: 20rem;
-            padding: 1rem;
-        }
-        &12 {
             width: 13rem;
             padding: 1rem;
             text-align: center;

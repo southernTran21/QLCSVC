@@ -6,16 +6,17 @@ router.route("/").get((req, res) => {
     db.query(sql, (err, result) => {
         if (err) throw err;
         console.log("fetched");
+
         res.json(result);
     });
 });
 
 router.route("/getFacilityForCategory/:ID").get((req, res) => {
     const { ID } = req.params;
-    console.log(ID)
+    console.log(ID);
     if (ID != "all") {
         let sql =
-            "SELECT * FROM facility where idCat = ? ORDER BY id DESC limit 10 OFFSET 0";
+            "SELECT facility.ID as id, facility.name as name, QRCODE, categories.name as nameCat, donvitinh.name as donViTinh, ngayMua, hanSuDung, giaTien, donviquanly.name as donViQuanLy, moTa, idCat FROM (facility INNER JOIN categories on facility.idCat = categories.ID INNER join donViTinh on facility.donViTinh = donViTinh.ID INNER JOIN donViQuanLy on facility.donViQuanLy = donViQuanLy.ID) where idCat = ? ORDER BY id ASC limit 10 OFFSET 0";
         let sqlGetCount =
             "SELECT COUNT(*) as SL FROM `facility` where idCat = ? ";
         db.query(sql, ID, (err, result) => {
@@ -23,52 +24,29 @@ router.route("/getFacilityForCategory/:ID").get((req, res) => {
             console.log("fetched");
             db.query(sqlGetCount, ID, (err, count) => {
                 if (err) throw err;
-                res.json([
-                    result,
-                    count[0].SL - 1 < 10
-                        ? (sl = 1)
-                        : (sl = Math.floor((count[0].SL - 1) / 10) + 1),
-                ]);
+                console.log(Math.ceil(count[0].SL / 10));
+                res.json([result, (sl = Math.ceil(count[0].SL / 10))]);
             });
         });
     } else {
-        let sql =
-            "SELECT * FROM facility ORDER BY id DESC limit 10 OFFSET 0";
-        let sqlGetCount =
-            "SELECT COUNT(*) as SL FROM `facility` ";
+        let sql = "SELECT facility.ID as id, facility.name as name, QRCODE, categories.name as nameCat, donvitinh.name as donViTinh, ngayMua, hanSuDung, giaTien, donviquanly.name as donViQuanLy, moTa, idCat FROM (facility INNER JOIN categories on facility.idCat = categories.ID INNER join donViTinh on facility.donViTinh = donViTinh.ID INNER JOIN donViQuanLy on facility.donViQuanLy = donViQuanLy.ID) ORDER BY id ASC limit 10 OFFSET 0";
+        let sqlGetCount = "SELECT COUNT(*) as SL FROM `facility` ";
         db.query(sql, (err, result) => {
             if (err) throw err;
             console.log("fetched");
             db.query(sqlGetCount, (err, count) => {
                 if (err) throw err;
-                res.json([
-                    result,
-                    count[0].SL - 1 < 10
-                        ? (sl = 1)
-                        : (sl = Math.floor((count[0].SL - 1) / 10) + 1),
-                ]);
+                res.json([result, (sl = Math.ceil(count[0].SL / 10))]);
             });
         });
     }
-});
-
-router.route("/getCountPagination").get((req, res) => {
-    let sql = "SELECT COUNT(*) as SL FROM `facility`";
-    let sl = 0;
-    db.query(sql, (err, result) => {
-        result[0].SL - 1 < 10
-            ? (sl = 1)
-            : (sl = Math.floor((result[0].SL - 1) / 10) + 1);
-        console.log(result);
-        console.log(sl);
-    });
 });
 
 router.route("/getFacilityPagination/:page").get((req, res) => {
     const { page } = req.params;
     const max = page * 10;
     const min = max - 10;
-    let sql = "Select * from facility ORDER BY id DESC limit ? OFFSET ?";
+    let sql = "SELECT facility.ID as id, facility.name as name, QRCODE, categories.name as nameCat, donvitinh.name as donViTinh, ngayMua, hanSuDung, giaTien, donviquanly.name as donViQuanLy, moTa, idCat FROM (facility INNER JOIN categories on facility.idCat = categories.ID INNER join donViTinh on facility.donViTinh = donViTinh.ID INNER JOIN donViQuanLy on facility.donViQuanLy = donViQuanLy.ID) ORDER BY id ASC limit ? OFFSET ?";
     db.query(sql, [max, min], (err, result) => {
         if (err) throw err;
         console.log("fetched");
@@ -102,8 +80,6 @@ router.route("/add").post((req, res) => {
 
     const ID = year + month + date + hours + minutes + seconds + random;
     const QRCODE = year + month + date + hours + minutes + seconds + random;
-    const tinhTrang = 1;
-    const nguoiSuDung = null;
 
     const {
         name,
@@ -112,11 +88,11 @@ router.route("/add").post((req, res) => {
         ngayMua,
         hanSuDung,
         giaTien,
-        nguoiQuanLy,
+        donViQuanLy,
         moTa,
     } = req.body;
     let sql =
-        "INSERT INTO `facility`(`ID`, `name`, `QRCODE`, `idCat`, `donViTinh`, `ngayMua`, `hanSuDung`, `giaTien`, `nguoiSuDung`, `nguoiQuanLy`, `tinhTrang`, `moTa`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
+        "INSERT INTO `facility`(`ID`, `name`, `QRCODE`, `idCat`, `donViTinh`, `ngayMua`, `hanSuDung`, `giaTien`, `donViQuanLy`, `moTa`) VALUES (?,?,?,?,?,?,?,?,?,?)";
     db.query(
         sql,
         [
@@ -128,9 +104,7 @@ router.route("/add").post((req, res) => {
             ngayMua,
             hanSuDung,
             giaTien,
-            nguoiSuDung,
-            nguoiQuanLy,
-            tinhTrang,
+            donViQuanLy,
             moTa,
         ],
         (err, result) => {

@@ -5,7 +5,8 @@ import { message } from "antd";
 import { SheetJSFT } from "./type";
 import XLSX from "xlsx";
 import { make_cols } from "./MakeColumns";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
+import { CloseOutlined } from "@ant-design/icons";
 
 export default class FacilityAddExcel extends Component {
     constructor(props) {
@@ -54,61 +55,68 @@ export default class FacilityAddExcel extends Component {
         console.log(data);
         if (data.length > 0 && data != null && data != undefined) {
             data.map((result, index) => {
-                console.log(result["Hạn Sử Dụng (Tháng)"])
-                // axios
-                // .post("http://localhost:3001/facility/add", {
-                //     name: result["Hạn Sử Dụng (Tháng)"],
-                //     idCat: idCat,
-                //     donViTinh: donViTinh,
-                //     ngayMua: ngayMua,
-                //     hanSuDung: hanSuDung,
-                //     giaTien: giaTien,
-                //     nguoiQuanLy: nguoiQuanLy,
-                //     moTa: moTa,
-                // })
+                axios
+                .post("http://localhost:3001/facility/add", {
+                    name: result["Tên Tài Sản"],
+                    ngayMua: result["Ngày Mua (yyyy-mm-dd)"],
+                    hanSuDung: result["Hạn Sử Dụng (Tháng)"],
+                    giaTien: result["Giá  Tiền (VND)"],
+                    moTa: result["Mô Tả"],
+                })
             });
         }
+        message.success("Đã Lưu");
     };
 
     showResultImport = (data) => {
         if (data != null && data != undefined) {
             return (
-                <div>
-                    <div className="resultList">
-                        <div className="resultList__title d-flex">
-                            <div className="resultList__column1"></div>
-                            <div className="resultList__column2">Name</div>
-                            <div className="resultList__column3">BarCode</div>
-                            <div className="resultList__column4">QrCode</div>
-                            <div className="resultList__column5">Price</div>
-                            <div className="resultList__column6">
-                                Description
-                            </div>
+                <div className="result">
+                    <div className="result__list">
+                        <div className="result__title">
+                            <div className="result__column1"></div>
+                            <div className="result__column2">Tên Tài Sản</div>
+                            <div className="result__column3">Ngày Mua</div>
+                            <div className="result__column4">Hạn Sử Dụng</div>
+                            <div className="result__column5">Giá Tiền</div>
+                            <div className="result__column6">Mô Tả</div>
                         </div>
-                        <div className="resultList__content__wrapper">
+                        <div className="result__content__wrapper">
                             {data.map((result, index) => {
                                 return (
                                     <div
-                                        className="resultList__content d-flex"
+                                        className="result__content"
                                         key={index}
                                     >
-                                        <div className="resultList__column1">
+                                        <div className="result__column1">
                                             <span>{index + 1}</span>
                                         </div>
-                                        <div className="resultList__column2">
-                                            <span>{result.Name}</span>
+                                        <div className="result__column2">
+                                            <span>{result["Tên Tài Sản"]}</span>
                                         </div>
-                                        <div className="resultList__column3">
-                                            <span>{result.BarCode}</span>
+                                        <div className="result__column3">
+                                            <span>
+                                                {
+                                                    result[
+                                                        "Ngày Mua (yyyy-mm-dd)"
+                                                    ]
+                                                }
+                                            </span>
                                         </div>
-                                        <div className="resultList__column4">
-                                            <span>{result.QrCode}</span>
+                                        <div className="result__column4">
+                                            <span>
+                                                {result["Hạn Sử Dụng (Tháng)"]}
+                                            </span>
                                         </div>
-                                        <div className="resultList__column5">
-                                            <span>{result.Price}</span>
+                                        <div className="result__column5">
+                                            <span>
+                                                {Number(
+                                                    result["Giá  Tiền (VND)"]
+                                                ).toLocaleString("el-GR")}
+                                            </span>
                                         </div>
-                                        <div className="resultList__column6">
-                                            <span>{result.Description}</span>
+                                        <div className="result__column6">
+                                            <span>{result["Mô Tả"]}</span>
                                         </div>
                                     </div>
                                 );
@@ -116,12 +124,12 @@ export default class FacilityAddExcel extends Component {
                         </div>
                     </div>
                     <div
-                        className="resultList__button__Wrapper d-flex justify-content-end"
+                        className="result__button__Wrapper"
                         onClick={() => {
                             this.onSubmit();
                         }}
                     >
-                        <span className="resultList__button">Submit</span>
+                        <span className="result__button">Submit</span>
                     </div>
                 </div>
             );
@@ -135,24 +143,34 @@ export default class FacilityAddExcel extends Component {
         return (
             <div className="facility-add-excel">
                 <div className="facility-add-excel__input">
-                    <label className="facility-add-excel__title">
-                        Thêm Tài Sản Bằng File Excel
-                    </label>
-                    <br />
-                    <input
-                        type="file"
-                        className="facility-add-excel__input-file-excel"
-                        id="file"
-                        accept={SheetJSFT}
-                        onChange={this.handleChange}
-                    />
-                    <br />
-                    <input
-                        className="facility-add-excel__button-submit"
-                        type="submit"
-                        value="Xác Nhận"
-                        onClick={this.handleFile}
-                    />
+                    <div>
+                        <label className="facility-add-excel__title">
+                            Thêm Tài Sản Bằng File Excel
+                        </label>
+                        <br />
+                        <input
+                            type="file"
+                            className="facility-add-excel__input-file-excel"
+                            id="file"
+                            accept={SheetJSFT}
+                            onChange={this.handleChange}
+                        />
+                        <br />
+                        <input
+                            className="facility-add-excel__button-submit"
+                            type="submit"
+                            value="Xác Nhận"
+                            onClick={this.handleFile}
+                        />
+                    </div>
+                    <div className="facility-add-excel__button-close">
+                        <Link
+                            to="/admin/taisan"
+                            className="categories-add__icon"
+                        >
+                            <CloseOutlined />
+                        </Link>
+                    </div>
                 </div>
                 {this.showResultImport(data)}
             </div>

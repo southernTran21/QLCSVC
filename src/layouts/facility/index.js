@@ -26,7 +26,7 @@ export default class Facility extends Component {
                     ID: 0,
                     name: "",
                     QRCODE: "",
-                    idCat: "",
+                    nameCat: "",
                     donViTinh: "",
                     ngayMua: "",
                     hanSuDung: "",
@@ -144,7 +144,7 @@ export default class Facility extends Component {
 
     hiddenContentDescription = (description) => {
         // console.log(description);
-        if (description.length > 100) {
+        if (description.length > 100 && description.length != undefined) {
             const str = description.slice(0, 100);
 
             return (
@@ -161,6 +161,7 @@ export default class Facility extends Component {
 
     render() {
         const { categories, facilityCategories, pageCount, page } = this.state;
+        console.log(facilityCategories)
         return (
             <div className="facility">
                 <div className="facility__top">
@@ -171,6 +172,14 @@ export default class Facility extends Component {
                             <Link to="/admin/taisan-add">
                                 <span className="facility__button__text">
                                     Thêm mới
+                                </span>
+                            </Link>
+                        </div>
+                        <div className="facility__button">
+                            <PlusOutlined />
+                            <Link to="/admin/taisan-add-excel">
+                                <span className="facility__button__text">
+                                    Thêm mới bằng Excel
                                 </span>
                             </Link>
                         </div>
@@ -192,7 +201,7 @@ export default class Facility extends Component {
                                         QRCODE
                                     </div>
                                     <div className="facility__column3">
-                                        Mã Loại
+                                        Tên Loại
                                     </div>
                                     <div className="facility__column4">
                                         Đơn Vị Tính
@@ -207,18 +216,12 @@ export default class Facility extends Component {
                                         Giá Tiền
                                     </div>
                                     <div className="facility__column8">
-                                        Người Sử Dụng
+                                        Đơn Vị Quản Lý
                                     </div>
                                     <div className="facility__column9">
-                                        Người Quản Lý
-                                    </div>
-                                    <div className="facility__column10">
-                                        Tình Trạng
-                                    </div>
-                                    <div className="facility__column11">
                                         Mô Tả
                                     </div>
-                                    <div className="facility__column12">
+                                    <div className="facility__column10">
                                         Hành Động
                                     </div>
                                 </div>
@@ -240,7 +243,7 @@ export default class Facility extends Component {
                                                     </div>
                                                 </div>
                                                 <div className="facility__column3">
-                                                    <span>{item.idCat}</span>
+                                                    <span>{item.nameCat}</span>
                                                 </div>
                                                 <div className="facility__column4">
                                                     <span>
@@ -260,27 +263,27 @@ export default class Facility extends Component {
                                                     </span>
                                                 </div>
                                                 <div className="facility__column7">
-                                                    <span>{item.giaTien}</span>
+                                                    <span>
+                                                        {Number(
+                                                            item.giaTien
+                                                        ).toLocaleString(
+                                                            "el-GR"
+                                                        )}
+                                                    </span>
                                                 </div>
                                                 <div className="facility__column8">
                                                     <span>
-                                                        {item.nguoiSuDung}
+                                                        {item.donViQuanLy}
                                                     </span>
                                                 </div>
                                                 <div className="facility__column9">
                                                     <span>
-                                                        {item.nguoiQuanLy}
+                                                        {this.hiddenContentDescription(
+                                                            item.moTa
+                                                        )}
                                                     </span>
                                                 </div>
                                                 <div className="facility__column10">
-                                                    <span>
-                                                        {item.tinhTrang}
-                                                    </span>
-                                                </div>
-                                                <div className="facility__column11">
-                                                    <span>{this.hiddenContentDescription(item.moTa)}</span>
-                                                </div>
-                                                <div className="facility__column12">
                                                     <Popconfirm
                                                         placement="top"
                                                         title={textDelete}
@@ -344,7 +347,7 @@ export default class Facility extends Component {
                                                 QRCODE
                                             </div>
                                             <div className="facility__column3">
-                                                Mã Loại
+                                                Tên Loại
                                             </div>
                                             <div className="facility__column4">
                                                 Đơn Vị Tính
@@ -359,18 +362,12 @@ export default class Facility extends Component {
                                                 Giá Tiền
                                             </div>
                                             <div className="facility__column8">
-                                                Người Sử Dụng
+                                                Đơn Vị Quản Lý
                                             </div>
                                             <div className="facility__column9">
-                                                Người Quản Lý
-                                            </div>
-                                            <div className="facility__column10">
-                                                Tình Trạng
-                                            </div>
-                                            <div className="facility__column11">
                                                 Mô Tả
                                             </div>
-                                            <div className="facility__column12">
+                                            <div className="facility__column10">
                                                 Hành Động
                                             </div>
                                         </div>
@@ -396,7 +393,7 @@ export default class Facility extends Component {
                                                             </div>
                                                             <div className="facility__column3">
                                                                 <span>
-                                                                    {item.idCat}
+                                                                    {item.nameCat}
                                                                 </span>
                                                             </div>
                                                             <div className="facility__column4">
@@ -422,38 +419,28 @@ export default class Facility extends Component {
                                                             </div>
                                                             <div className="facility__column7">
                                                                 <span>
-                                                                    {
+                                                                    {Number(
                                                                         item.giaTien
-                                                                    }
+                                                                    ).toLocaleString(
+                                                                        "el-GR"
+                                                                    )}
                                                                 </span>
                                                             </div>
                                                             <div className="facility__column8">
                                                                 <span>
                                                                     {
-                                                                        item.nguoiSuDung
+                                                                        item.donViQuanLy
                                                                     }
                                                                 </span>
                                                             </div>
                                                             <div className="facility__column9">
                                                                 <span>
-                                                                    {
-                                                                        item.nguoiQuanLy
-                                                                    }
+                                                                    {this.hiddenContentDescription(
+                                                                        item.moTa
+                                                                    )}
                                                                 </span>
                                                             </div>
                                                             <div className="facility__column10">
-                                                                <span>
-                                                                    {
-                                                                        item.tinhTrang
-                                                                    }
-                                                                </span>
-                                                            </div>
-                                                            <div className="facility__column11">
-                                                                <span>
-                                                                    {this.hiddenContentDescription(item.moTa)}
-                                                                </span>
-                                                            </div>
-                                                            <div className="facility__column12">
                                                                 <Popconfirm
                                                                     placement="top"
                                                                     title={

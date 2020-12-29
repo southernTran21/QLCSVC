@@ -17,6 +17,8 @@ const accountRouter = require("./route/account");
 const danhMucQuyenRouter = require("./route/danhMucQuyen");
 const nhanVienRouter = require("./route/nhanVien");
 const facilityRouter = require("./route/facility");
+const donViTinhRouter = require("./route/donViTinh");
+const donViQuanLyRouter = require("./route/donviQuanLy");
 // ---------- END ----------
 
 // ---------- KHAI BÁO ROUTER ----------
@@ -25,6 +27,8 @@ app.use("/account", accountRouter);
 app.use("/quyen", danhMucQuyenRouter);
 app.use("/nhanvien", nhanVienRouter);
 app.use("/facility", facilityRouter);
+app.use("/donvitinh", donViTinhRouter);
+app.use("/donViQuanLy", donViQuanLyRouter);
 // ---------- END ----------
 
 app.listen(3001, () =>

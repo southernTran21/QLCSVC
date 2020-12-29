@@ -7,8 +7,6 @@ import { Input, Select, DatePicker, message } from "antd";
 const { TextArea } = Input;
 const { Option } = Select;
 
-const dataDonViTinh = ["Cái", "Cây"];
-
 export default class FacilityAdd extends Component {
     constructor(props) {
         super(props);
@@ -19,10 +17,11 @@ export default class FacilityAdd extends Component {
             ngayMua: "",
             hanSuDung: "",
             giaTien: "",
-            nguoiQuanLy: "",
+            donViQuanLy: "",
             moTa: "",
             categories: [],
-            nhanVien: [],
+            donViQuanLy: [],
+            dataDonViTinh: [],
         };
     }
     componentDidMount() {
@@ -35,9 +34,17 @@ export default class FacilityAdd extends Component {
                 console.log(error);
             });
         axios
-            .get("http://localhost:3001/nhanvien")
+            .get("http://localhost:3001/donViQuanLy")
             .then((response) => {
-                this.setState({ nhanVien: response.data });
+                this.setState({ donViQuanLy: response.data });
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+        axios
+            .get("http://localhost:3001/donvitinh")
+            .then((response) => {
+                this.setState({ dataDonViTinh: response.data });
             })
             .catch((error) => {
                 console.log(error);
@@ -68,9 +75,9 @@ export default class FacilityAdd extends Component {
         });
     };
 
-    onChangeNguoiQuanLy = (value) => {
+    onChangeDonViQuanLy = (value) => {
         this.setState({
-            nguoiQuanLy: value,
+            donViQuanLy: value,
         });
     };
 
@@ -100,7 +107,7 @@ export default class FacilityAdd extends Component {
             ngayMua,
             hanSuDung,
             giaTien,
-            nguoiQuanLy,
+            donViQuanLy,
             moTa,
         } = this.state;
         if (
@@ -110,7 +117,7 @@ export default class FacilityAdd extends Component {
             ngayMua,
             hanSuDung,
             giaTien,
-            nguoiQuanLy,
+            donViQuanLy,
             moTa == "")
         ) {
             message.error(
@@ -125,7 +132,7 @@ export default class FacilityAdd extends Component {
                     ngayMua: ngayMua,
                     hanSuDung: hanSuDung,
                     giaTien: giaTien,
-                    nguoiQuanLy: nguoiQuanLy,
+                    donViQuanLy: donViQuanLy,
                     moTa: moTa,
                 })
                 .then((res) => {
@@ -137,7 +144,7 @@ export default class FacilityAdd extends Component {
                         ngayMua: "",
                         hanSuDung: "",
                         giaTien: "",
-                        nguoiQuanLy: "",
+                        donViQuanLy: "",
                         moTa: "",
                     });
                 });
@@ -145,7 +152,7 @@ export default class FacilityAdd extends Component {
     };
 
     render() {
-        const { categories, nhanVien } = this.state;
+        const { categories, donViQuanLy, dataDonViTinh } = this.state;
         return (
             <div className="facility-add">
                 <div className="categories-add__top">
@@ -188,8 +195,8 @@ export default class FacilityAdd extends Component {
                             >
                                 {dataDonViTinh.map((result, index) => {
                                     return (
-                                        <Option value={result} key={index}>
-                                            {result}
+                                        <Option value={result.ID} key={index}>
+                                            {result.name}
                                         </Option>
                                     );
                                 })}
@@ -204,16 +211,16 @@ export default class FacilityAdd extends Component {
                             />
                         </div>
                         <div className="nhanvien-add__input">
-                            <span>Người Quản Lý</span>
+                            <span>Đơn Vị Quản Lý</span>
                             <Select
                                 style={{ width: "100%" }}
-                                onChange={this.onChangeNguoiQuanLy}
-                                placeholder="Chọn Người Quản Lý"
+                                onChange={this.onChangeDonViQuanLy}
+                                placeholder="Chọn Đơn Vị Quản Lý"
                             >
-                                {nhanVien.map((result, index) => {
+                                {donViQuanLy.map((result, index) => {
                                     return (
                                         <Option value={result.ID} key={index}>
-                                            {result.tenNV}
+                                            {result.name}
                                         </Option>
                                     );
                                 })}
