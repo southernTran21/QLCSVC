@@ -161,7 +161,7 @@ export default class Facility extends Component {
 
     render() {
         const { categories, facilityCategories, pageCount, page } = this.state;
-        console.log(facilityCategories)
+        console.log(facilityCategories);
         return (
             <div className="facility">
                 <div className="facility__top">
@@ -233,7 +233,15 @@ export default class Facility extends Component {
                                                 key={index}
                                             >
                                                 <div className="facility__column1">
-                                                    <span>{item.name}</span>
+                                                    <Link
+                                                        to={{
+                                                            pathname:
+                                                                "/admin/taisan-detail",
+                                                            search: `?id=${item.id}`,
+                                                        }}
+                                                    >
+                                                        <span>{item.name}</span>
+                                                    </Link>
                                                 </div>
                                                 <div className="facility__column2">
                                                     <div className="QRCODE">
@@ -380,9 +388,19 @@ export default class Facility extends Component {
                                                             key={index}
                                                         >
                                                             <div className="facility__column1">
-                                                                <span>
-                                                                    {item.name}
-                                                                </span>
+                                                                <Link
+                                                                    to={{
+                                                                        pathname:
+                                                                            "/admin/taisan-detail",
+                                                                        search: `?id=${item.id}`,
+                                                                    }}
+                                                                >
+                                                                    <span>
+                                                                        {
+                                                                            item.name
+                                                                        }
+                                                                    </span>
+                                                                </Link>
                                                             </div>
                                                             <div className="facility__column2">
                                                                 <div className="QRCODE">
@@ -393,7 +411,9 @@ export default class Facility extends Component {
                                                             </div>
                                                             <div className="facility__column3">
                                                                 <span>
-                                                                    {item.nameCat}
+                                                                    {
+                                                                        item.nameCat
+                                                                    }
                                                                 </span>
                                                             </div>
                                                             <div className="facility__column4">

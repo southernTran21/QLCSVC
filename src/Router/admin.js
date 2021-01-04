@@ -13,6 +13,10 @@ import FacilityAdd from "../layouts/facility/facilityAdd";
 import AccountEdit from "../layouts/account/accountEdit";
 import CategoriesEdit from "../layouts/categories/categoriesEdit";
 import FacilityAddExcel from "../layouts/facility/facilityAddExcel";
+import DonViTinh from "../layouts/donViTinh";
+import DonViTinhAdd from "../layouts/donViTinh/donViTinhAdd";
+import DonViQuanLy from "../layouts/donViQuanLy";
+import FacilityDetail from "../layouts/facility/facilityDetail";
 
 export default class Admin extends Component {
     handleInputURL = (accountType, match) => {
@@ -72,9 +76,29 @@ export default class Admin extends Component {
                             component={FacilityAdd}
                         />
                         <Route
+                            path={`${match}/taisan-detail`}
+                            exact
+                            component={FacilityDetail}
+                        />
+                        <Route
                             path={`${match}/taisan-add-excel`}
                             exact
                             component={FacilityAddExcel}
+                        />
+                        <Route
+                            path={`${match}/don-vi-tinh`}
+                            exact
+                            component={DonViTinh}
+                        />
+                        <Route
+                            path={`${match}/don-vi-tinh-add`}
+                            exact
+                            component={DonViTinhAdd}
+                        />
+                        <Route
+                            path={`${match}/don-vi-quan-ly`}
+                            exact
+                            component={DonViQuanLy}
                         />
                     </Fragment>
                 );

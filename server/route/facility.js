@@ -11,6 +11,18 @@ router.route("/").get((req, res) => {
     });
 });
 
+router.route("/:ID").get((req, res) => {
+    const { ID } = req.params;
+    let sql =
+        "SELECT facility.ID as id, facility.name as name, QRCODE, categories.name as nameCat, donvitinh.name as donViTinh, ngayMua, hanSuDung, giaTien, donviquanly.name as donViQuanLy, moTa, idCat FROM (facility INNER JOIN categories on facility.idCat = categories.ID INNER join donViTinh on facility.donViTinh = donViTinh.ID INNER JOIN donViQuanLy on facility.donViQuanLy = donViQuanLy.ID) where facility.ID = ?";
+    db.query(sql, ID, (err, result) => {
+        if (err) throw err;
+        console.log("fetched");
+
+        res.json(result);
+    });
+});
+
 router.route("/getFacilityForCategory/:ID").get((req, res) => {
     const { ID } = req.params;
     console.log(ID);
@@ -29,7 +41,8 @@ router.route("/getFacilityForCategory/:ID").get((req, res) => {
             });
         });
     } else {
-        let sql = "SELECT facility.ID as id, facility.name as name, QRCODE, categories.name as nameCat, donvitinh.name as donViTinh, ngayMua, hanSuDung, giaTien, donviquanly.name as donViQuanLy, moTa, idCat FROM (facility INNER JOIN categories on facility.idCat = categories.ID INNER join donViTinh on facility.donViTinh = donViTinh.ID INNER JOIN donViQuanLy on facility.donViQuanLy = donViQuanLy.ID) ORDER BY id ASC limit 10 OFFSET 0";
+        let sql =
+            "SELECT facility.ID as id, facility.name as name, QRCODE, categories.name as nameCat, donvitinh.name as donViTinh, ngayMua, hanSuDung, giaTien, donviquanly.name as donViQuanLy, moTa, idCat FROM (facility INNER JOIN categories on facility.idCat = categories.ID INNER join donViTinh on facility.donViTinh = donViTinh.ID INNER JOIN donViQuanLy on facility.donViQuanLy = donViQuanLy.ID) ORDER BY id ASC limit 10 OFFSET 0";
         let sqlGetCount = "SELECT COUNT(*) as SL FROM `facility` ";
         db.query(sql, (err, result) => {
             if (err) throw err;
@@ -46,7 +59,8 @@ router.route("/getFacilityPagination/:page").get((req, res) => {
     const { page } = req.params;
     const max = page * 10;
     const min = max - 10;
-    let sql = "SELECT facility.ID as id, facility.name as name, QRCODE, categories.name as nameCat, donvitinh.name as donViTinh, ngayMua, hanSuDung, giaTien, donviquanly.name as donViQuanLy, moTa, idCat FROM (facility INNER JOIN categories on facility.idCat = categories.ID INNER join donViTinh on facility.donViTinh = donViTinh.ID INNER JOIN donViQuanLy on facility.donViQuanLy = donViQuanLy.ID) ORDER BY id ASC limit ? OFFSET ?";
+    let sql =
+        "SELECT facility.ID as id, facility.name as name, QRCODE, categories.name as nameCat, donvitinh.name as donViTinh, ngayMua, hanSuDung, giaTien, donviquanly.name as donViQuanLy, moTa, idCat FROM (facility INNER JOIN categories on facility.idCat = categories.ID INNER join donViTinh on facility.donViTinh = donViTinh.ID INNER JOIN donViQuanLy on facility.donViQuanLy = donViQuanLy.ID) ORDER BY id ASC limit ? OFFSET ?";
     db.query(sql, [max, min], (err, result) => {
         if (err) throw err;
         console.log("fetched");

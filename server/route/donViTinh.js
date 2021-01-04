@@ -9,31 +9,11 @@ router.route("/").get((req, res) => {
         res.json(result);
     });
 });
-router.route("/:ID").get((req, res) => {
-    const {ID} = req.params;
-    let sql = "SELECT * FROM donvitinh where ID = ?";
-    db.query(sql, ID, (err, result) => {
-        if (err) throw err;
-        console.log("fetched");
-        res.json(result);
-    });
-});
 
 router.route("/add").post((req, res) => {
     const { name } = req.body;
     let sql = "INSERT INTO `donvitinh`(`name`) VALUES (?)";
     db.query(sql, [name], (err, result) => {
-        if (err) throw err;
-        console.log("added");
-        res.json(result);
-    });
-});
-
-router.route("/edit/:ID").post((req, res) => {
-    const { ID } = req.params;
-    const { name } = req.body;
-    let sql = "UPDATE `donvitinh` SET `name`= ? WHERE ID = ?";
-    db.query(sql, [name, ID], (err, result) => {
         if (err) throw err;
         console.log("added");
         res.json(result);
