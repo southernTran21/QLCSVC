@@ -237,7 +237,7 @@ export default class Facility extends Component {
                                                         to={{
                                                             pathname:
                                                                 "/admin/taisan-detail",
-                                                            search: `?id=${item.id}`,
+                                                            search: `?id=${item.QRCODE}`,
                                                         }}
                                                     >
                                                         <span>{item.name}</span>
@@ -392,7 +392,7 @@ export default class Facility extends Component {
                                                                     to={{
                                                                         pathname:
                                                                             "/admin/taisan-detail",
-                                                                        search: `?id=${item.id}`,
+                                                                        search: `?id=${item.QRCODE}`,
                                                                     }}
                                                                 >
                                                                     <span>

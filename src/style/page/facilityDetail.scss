@@ -1,0 +1,41 @@
+.facility-detail {
+    &__body {
+        background-color: white;
+        margin: 0 0.5rem;
+        margin-top: 0.5rem;
+        height: 90vh;
+        max-height: 90vh;
+        overflow-y: scroll;
+        overflow-x: hidden;
+        padding: 1rem;
+        &-top {
+            @include flexBox(flex-start, center);
+            font-size: 1.8rem;
+            border-bottom: 1px solid #c1c1c1;
+            padding-bottom: 1rem;
+        }
+        &-title {
+            margin-left: 0.5rem;
+            font-weight: bold;
+        }
+    }
+    &__content {
+        margin-top: 1rem;
+        padding: 1rem;
+        @include flexBox();
+    }
+    &__result {
+        @include flexBox();
+        padding: 1rem 0;
+        &-title {
+            font-size: 1.6rem;
+            font-weight: bold;
+            margin-right: 1rem;
+            width: 15rem;
+        }
+    }
+    &__left, &__right {
+        width: 50%;
+        padding-right: 1rem;
+    }
+}
