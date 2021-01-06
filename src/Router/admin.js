@@ -21,7 +21,7 @@ import FacilityDetail from "../layouts/facility/facilityDetail";
 export default class Admin extends Component {
     handleInputURL = (accountType, match) => {
         switch (accountType) {
-            case '1', '3': // quyền admin
+            case ("1", "3"): // quyền admin
                 return (
                     <Fragment>
                         <Route path={`${match}`} exact component={HomeAdmin} />
@@ -102,6 +102,7 @@ export default class Admin extends Component {
                         />
                     </Fragment>
                 );
+                break;
             default:
                 break;
         }
@@ -124,7 +125,7 @@ export default class Admin extends Component {
                         style={{
                             width: "83%",
                             backgroundColor: "#f0f0f0",
-                            height:"100vh"
+                            height: "100vh",
                         }}
                     >
                         {this.handleInputURL(accountType, match)}

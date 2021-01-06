@@ -6,7 +6,6 @@ router.route("/").get((req, res) => {
     db.query(sql, (err, result) => {
         if (err) throw err;
         console.log("fetched");
-
         res.json(result);
     });
 });

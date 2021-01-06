@@ -60,7 +60,13 @@ class LoginPage extends Component {
                         "displayName",
                         usernameConfirm.displayName
                     );
-                    history.push("/admin");
+                    if(usernameConfirm.idQuyen == '3' ||usernameConfirm.idQuyen == '1'){
+                        history.push("/admin");
+                    }
+                    else
+                    {
+                        history.push("/muon-csvc");
+                    }
                     window.location.reload();
                 } else message.error("Mật Khẩu Không Được Để Trống!!!!");
             } else message.error("Tên Đăng Nhập Và Mật Khẩu Không Được Để Trống!!!!");

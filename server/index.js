@@ -10,6 +10,8 @@ app.use(pino);
 app.use(cors());
 app.use(express.json());
 
+process.env.TZ = 'Asia/Ho_Chi_Minh'
+
 // ---------- KHAI BÁO LINK CONNECT  ----------
 const db = require("./connection");
 const categoriesRouter = require("./route/categories");
