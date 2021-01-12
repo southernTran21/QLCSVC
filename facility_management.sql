@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th1 06, 2021 lúc 07:12 AM
+-- Thời gian đã tạo: Th1 12, 2021 lúc 09:16 PM
 -- Phiên bản máy phục vụ: 10.4.16-MariaDB
 -- Phiên bản PHP: 7.4.12
 
@@ -142,12 +142,12 @@ INSERT INTO `donvitinh` (`ID`, `name`) VALUES
 --
 
 CREATE TABLE `facility` (
-  `ID` bigint(20) NOT NULL,
+  `ID` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `QRCODE` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `idCat` int(11) DEFAULT NULL,
   `donViTinh` int(50) DEFAULT NULL,
-  `ngayMua` date NOT NULL,
+  `ngayMua` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `hanSuDung` int(11) NOT NULL,
   `giaTien` decimal(10,0) NOT NULL,
   `donViQuanLy` int(11) DEFAULT NULL,
@@ -159,18 +159,42 @@ CREATE TABLE `facility` (
 --
 
 INSERT INTO `facility` (`ID`, `name`, `QRCODE`, `idCat`, `donViTinh`, `ngayMua`, `hanSuDung`, `giaTien`, `donViQuanLy`, `moTa`) VALUES
-(123456, 'TEST', '123456', 10, 1, '2020-11-26', 6, '100000', 1, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled'),
-(2020121, 'asdx', '2020121', 10, 1, '2020-12-02', 6, '12523', 1, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled'),
-(202012121, 'asdx', '202012121', 10, 1, '2020-12-02', 6, '12523', 1, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled'),
-(2020121217, 'asdx', '2020121217', 10, 1, '2020-12-02', 6, '12523', 1, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled'),
-(2147483647, 'asdx', '202012121724562929', 12, 1, '2020-12-02', 6, '12523', 1, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled'),
-(20201212172, 'asdx', '20201212172', 10, 1, '2020-12-02', 6, '12523', 1, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled'),
-(2020121217263, 'asdx', '2020121217263', 10, 1, '2020-12-02', 6, '12523', 1, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled'),
-(20201212172637, 'asdx', '20201212172637', 10, 1, '2020-12-02', 6, '12523', 1, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled'),
-(202012121726379, 'asdx', '202012121726379', 10, 1, '2020-12-02', 6, '12523', 1, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled'),
-(20201212172637983, 'asdx', '20201212172637983', 10, 1, '2020-12-02', 6, '12523', 1, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled'),
-(202012121726379832, 'asdx', '202012121726379832', 10, 1, '2020-12-02', 6, '12523', 1, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled'),
-(202012292318562873, 'abcádasd', '202012292318562873', 10, 1, '2015-05-12', 6, '1000000', 1, 'acb abc abc abc acb acb acb');
+('123456', 'TEST', '123456', 10, 1, '2020-11-25', 6, '100000', 1, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled'),
+('2020121', 'asdx', '2020121', 10, 1, '2020-12-02', 6, '12523', NULL, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled'),
+('202012121', 'asdx', '202012121', 10, 1, '2020-12-02', 6, '12523', 1, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled'),
+('2020121217', 'asdx', '2020121217', 10, 1, '2020-12-02', 6, '12523', 1, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled'),
+('20201212172', 'asdx', '20201212172', 10, 1, '2020-12-02', 6, '12523', 1, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled'),
+('2020121217263', 'asdx', '2020121217263', 10, 1, '2020-12-02', 6, '12523', 1, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled'),
+('20201212172637', 'asdx', '20201212172637', 10, 1, '2020-12-02', 6, '12523', 1, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled'),
+('202012121726379', 'asdx', '202012121726379', 10, 1, '2020-12-02', 6, '12523', 1, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled'),
+('202012121726379832', 'asdx', '202012121726379832', 10, 1, '2020-12-02', 6, '12523', 1, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled'),
+('202012292318562873', 'abcádasd', '202012292318562873', 10, 1, '2015-05-12', 6, '1000000', 1, 'acb abc abc abc acb acb acb'),
+('20210107151349', 'moi nhap', '202101071513499261', 10, 2, '2021-01-01', 6, '123124', 1, 'fsdfcvc sdfsd'),
+('2021121217263', 'asdx', '20201212172637983', 10, 1, '2020-12-02', 6, '12523', 1, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled'),
+('2147483647', 'asdx', '202012121724562929', 12, 1, '2020-12-02', 6, '12523', 1, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `history`
+--
+
+CREATE TABLE `history` (
+  `ID` int(11) NOT NULL,
+  `QRCODE` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Date` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `history`
+--
+
+INSERT INTO `history` (`ID`, `QRCODE`, `Name`, `Date`) VALUES
+(7, '123456', 'TEST', '13-01-2021'),
+(8, '123456', 'TEST', '13-01-2021'),
+(9, '123456', 'TEST', '13-01-2021'),
+(10, '123456', 'TEST', '13-01-2021');
 
 -- --------------------------------------------------------
 
@@ -259,6 +283,12 @@ ALTER TABLE `facility`
   ADD KEY `KhoaNgoaiCAT` (`idCat`);
 
 --
+-- Chỉ mục cho bảng `history`
+--
+ALTER TABLE `history`
+  ADD PRIMARY KEY (`ID`);
+
+--
 -- Chỉ mục cho bảng `muontaisan`
 --
 ALTER TABLE `muontaisan`
@@ -304,6 +334,12 @@ ALTER TABLE `donviquanly`
 --
 ALTER TABLE `donvitinh`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT cho bảng `history`
+--
+ALTER TABLE `history`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT cho bảng `nhanvien`
