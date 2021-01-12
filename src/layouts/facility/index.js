@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { Popconfirm, message, Tabs, Table } from "antd";
-import Pagination from "react-js-pagination";
+import { Popconfirm, message, Tabs } from "antd";
 import {
     PlusOutlined,
     DeleteOutlined,
@@ -23,7 +22,7 @@ export default class Facility extends Component {
             categories: [],
             facilityCategories: [
                 {
-                    ID: 0,
+                    id: 0,
                     name: "",
                     QRCODE: "",
                     nameCat: "",
@@ -237,7 +236,7 @@ export default class Facility extends Component {
                                                         to={{
                                                             pathname:
                                                                 "/admin/taisan-detail",
-                                                            search: `?id=${item.QRCODE}`,
+                                                            search: `?id=${item.id}`,
                                                         }}
                                                     >
                                                         <span>{item.name}</span>
@@ -392,7 +391,7 @@ export default class Facility extends Component {
                                                                     to={{
                                                                         pathname:
                                                                             "/admin/taisan-detail",
-                                                                        search: `?id=${item.QRCODE}`,
+                                                                        search: `?id=${item.id}`,
                                                                     }}
                                                                 >
                                                                     <span>

@@ -28,7 +28,6 @@ export default class NhanVien extends Component {
                 <div
                     style={{
                         width: "100%",
-                        display: "flex",
                     }}
                 >
                     {this.handleInputURL(accountType, match)}

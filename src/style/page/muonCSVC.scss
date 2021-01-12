@@ -1,0 +1,17 @@
+.muon-csvc{
+    &__navbar {
+        @include flexBox(space-between, center);
+        height: 5rem;
+        background-color: #222d32;
+        color: white;
+        padding: 0 2rem;
+        .sidebar__button-logout{
+            margin: 0;
+        }
+    }
+    &__title {
+        text-transform: uppercase;
+        font-size: 1.6rem;
+        cursor: default;
+    }
+}

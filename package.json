@@ -24,7 +24,7 @@
     "xlsx": "^0.16.9"
   },
   "scripts": {
-    "start": "TZ='Asia/Ho_Chi_Minh' react-scripts start",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",

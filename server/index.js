@@ -21,6 +21,7 @@ const nhanVienRouter = require("./route/nhanVien");
 const facilityRouter = require("./route/facility");
 const donViTinhRouter = require("./route/donViTinh");
 const donViQuanLyRouter = require("./route/donviQuanLy");
+const historyRouter =  require("./route/history");
 // ---------- END ----------
 
 // ---------- KHAI BÁO ROUTER ----------
@@ -31,6 +32,7 @@ app.use("/nhanvien", nhanVienRouter);
 app.use("/facility", facilityRouter);
 app.use("/donvitinh", donViTinhRouter);
 app.use("/donViQuanLy", donViQuanLyRouter);
+app.use("/history", historyRouter)
 // ---------- END ----------
 
 app.listen(3001, () =>

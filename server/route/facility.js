@@ -10,6 +10,25 @@ router.route("/").get((req, res) => {
     });
 });
 
+router.route("/getNewFacility").get((req, res) => {
+    let sql =
+        "SELECT * FROM `facility` WHERE idCat is null or donViQuanLy is null";
+    db.query(sql, (err, result) => {
+        if (err) throw err;
+        console.log("fetched");
+        res.json(result);
+    });
+});
+router.route("/getFacility/:ID").get((req, res) => {
+    const { ID } = req.params;
+    let sql = "SELECT * FROM `facility` WHERE ID =?";
+    db.query(sql, ID, (err, result) => {
+        if (err) throw err;
+        console.log("fetched");
+        res.json(result);
+    });
+});
+
 router.route("/:ID").get((req, res) => {
     const { ID } = req.params;
     let sql =
@@ -29,7 +48,7 @@ router.route("/getFacilityForCategory/:ID").get((req, res) => {
         let sql =
             "SELECT facility.ID as id, facility.name as name, QRCODE, categories.name as nameCat, donvitinh.name as donViTinh, ngayMua, hanSuDung, giaTien, donviquanly.name as donViQuanLy, moTa, idCat FROM (facility INNER JOIN categories on facility.idCat = categories.ID INNER join donViTinh on facility.donViTinh = donViTinh.ID INNER JOIN donViQuanLy on facility.donViQuanLy = donViQuanLy.ID) where idCat = ? ORDER BY id ASC limit 10 OFFSET 0";
         let sqlGetCount =
-            "SELECT COUNT(*) as SL FROM `facility` where idCat = ? ";
+            "SELECT COUNT(*) as SL FROM (facility INNER JOIN categories on facility.idCat = categories.ID INNER join donViTinh on facility.donViTinh = donViTinh.ID INNER JOIN donViQuanLy on facility.donViQuanLy = donViQuanLy.ID) where idCat = ? ";
         db.query(sql, ID, (err, result) => {
             if (err) throw err;
             console.log("fetched");
@@ -42,7 +61,8 @@ router.route("/getFacilityForCategory/:ID").get((req, res) => {
     } else {
         let sql =
             "SELECT facility.ID as id, facility.name as name, QRCODE, categories.name as nameCat, donvitinh.name as donViTinh, ngayMua, hanSuDung, giaTien, donviquanly.name as donViQuanLy, moTa, idCat FROM (facility INNER JOIN categories on facility.idCat = categories.ID INNER join donViTinh on facility.donViTinh = donViTinh.ID INNER JOIN donViQuanLy on facility.donViQuanLy = donViQuanLy.ID) ORDER BY id ASC limit 10 OFFSET 0";
-        let sqlGetCount = "SELECT COUNT(*) as SL FROM `facility` ";
+        let sqlGetCount =
+            "SELECT COUNT(*) as SL FROM (facility INNER JOIN categories on facility.idCat = categories.ID INNER join donViTinh on facility.donViTinh = donViTinh.ID INNER JOIN donViQuanLy on facility.donViQuanLy = donViQuanLy.ID) ";
         db.query(sql, (err, result) => {
             if (err) throw err;
             console.log("fetched");
@@ -119,6 +139,43 @@ router.route("/add").post((req, res) => {
             giaTien,
             donViQuanLy,
             moTa,
+        ],
+        (err, result) => {
+            if (err) throw err;
+            console.log("added");
+            res.json(result);
+        }
+    );
+});
+
+router.route("/edit/:ID").post((req, res) => {
+    const { ID } = req.params;
+
+    const {
+        name,
+        idCat,
+        donViTinh,
+        ngayMua,
+        hanSuDung,
+        giaTien,
+        donViQuanLy,
+        moTa,
+    } = req.body;
+    console.log(req.body)
+    let sql =
+        "UPDATE `facility` SET `name`=?,`idCat`=?,`donViTinh`=?,`ngayMua`=?,`hanSuDung`=?,`giaTien`=?,`donViQuanLy`=?,`moTa`=? WHERE ID = ?";
+    db.query(
+        sql,
+        [
+            name,
+            idCat,
+            donViTinh,
+            ngayMua,
+            hanSuDung,
+            giaTien,
+            donViQuanLy,
+            moTa,
+            ID,
         ],
         (err, result) => {
             if (err) throw err;

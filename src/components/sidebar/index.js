@@ -65,7 +65,7 @@ export default class SideBar extends Component {
                         <Menu.Item key="1">
                             <Link to="/admin/taisan">Tất Cả Tài Sản</Link>
                         </Menu.Item>
-                        <Menu.Item key="2">Tôi Quản Lý</Menu.Item>
+                        <Menu.Item key="2"><Link to="/admin/taisan-new">Tài Sản Mới</Link></Menu.Item>
                         <Menu.Item key="3">Tôi Sử Dụng</Menu.Item>
                         <Menu.Item key="4">
                             <Link to="/admin/don-vi-tinh">Đơn Vị Tính</Link>

@@ -3,7 +3,12 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import history from "../../../history";
 
-import { LeftCircleOutlined, InfoCircleOutlined, HistoryOutlined } from "@ant-design/icons";
+import {
+    LeftCircleOutlined,
+    InfoCircleOutlined,
+    HistoryOutlined,
+    EditOutlined,
+} from "@ant-design/icons";
 import { Input, message } from "antd";
 
 export default class FacilityDetail extends Component {
@@ -44,12 +49,28 @@ export default class FacilityDetail extends Component {
         return (
             <div className="facility-detail">
                 <div className="categories-add__top">
-                    <Link to="/admin/taisan" className="categories-add__icon">
-                        <LeftCircleOutlined />
-                    </Link>
-                    <span className="categories-add__title">
-                        {facility.name}
-                    </span>
+                    <div className="facility-detail__left-top">
+                        <Link
+                            to="/admin/taisan"
+                            className="categories-add__icon"
+                        >
+                            <LeftCircleOutlined />
+                        </Link>
+                        <span className="categories-add__title">
+                            {facility.name}
+                        </span>
+                    </div>
+                    <div className="facility-detail__button-edit">
+                        <Link
+                            to={{
+                                pathname: "/admin/taisan-edit",
+                                search: `?id=${facility.id}`,
+                            }}
+                        >
+                            <EditOutlined />
+                            Sửa Thông Tin
+                        </Link>
+                    </div>
                 </div>
                 <div className="facility-detail__body">
                     <div className="facility-detail__body-top">
@@ -129,13 +150,15 @@ export default class FacilityDetail extends Component {
                                 <p className="facility-detail__result-title">
                                     Mô Tả:
                                 </p>
-                                <span style={{width: "32rem"}}>{facility.moTa}</span>
+                                <span style={{ width: "32rem" }}>
+                                    {facility.moTa}
+                                </span>
                             </div>
                         </div>
                     </div>
                     <div className="">
                         <div className="facility-detail__body-top">
-                        <HistoryOutlined />
+                            <HistoryOutlined />
                             <span className="facility-detail__body-title">
                                 LỊCH SỬ MƯỢN TÀI SẢN
                             </span>
