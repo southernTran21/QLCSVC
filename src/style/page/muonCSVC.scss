@@ -14,4 +14,42 @@
         font-size: 1.6rem;
         cursor: default;
     }
+    &__body {
+        @include centerFlexBox();
+        height: 75vh;
+    }
+    &__button-muon {
+        background-color: rgb(255, 30, 0);
+        color: white;
+        @include centerFlexBox();
+        @include box(20rem, 15rem);
+        border-radius: 2rem;
+        margin-right: 5rem;
+        font-size: 2rem;
+        cursor: pointer;
+        transition: all 0.25s ease-in-out;
+        &:hover {
+            box-shadow: 0px 0px 19px -5px rgba(0,0,0,0.75);
+        }
+    }
+    &__button-tra {
+        background-color: rgb(0, 26, 255);
+        color: white;
+        @include centerFlexBox();
+        @include box(20rem, 15rem);
+        border-radius: 2rem;
+        font-size: 2rem;
+        cursor: pointer;
+        transition: all 0.25s ease-in-out;
+        &:hover {
+            box-shadow: 0px 0px 19px -5px rgba(36, 36, 36, 0.75);
+        }
+    }
+    &__modal {
+        @include flexBox(flex-start, flex-start, column);
+        margin-bottom: 1rem;
+        &-title {
+            margin-bottom: .5em;
+        }
+    }
 }

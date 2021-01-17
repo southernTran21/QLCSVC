@@ -27,9 +27,6 @@ router.route("/add").post((req, res) => {
 
     const abc = date + "-" + month + "-" + year;
 
-    console.log(abc)
-
-
     let sql = "INSERT INTO `history` (`Name`, `Date`,`QRCODE`) VALUES (?, ?, ?)";
     db.query(sql, [QRCODE,abc, req.body.Date], (err, result) => {
         if (err) throw err;
