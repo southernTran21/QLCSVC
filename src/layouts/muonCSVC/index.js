@@ -74,8 +74,7 @@ export default class MuonCSVC extends Component {
                                 value={isCheckValueRadioButton}
                             >
                                 <Radio value={1}>Số Điện Thoại</Radio>
-                                <Radio value={2}>Email</Radio>
-                                <Radio value={3}>Số CMND</Radio>
+                                <Radio value={2}>Số CMND</Radio>
                             </Radio.Group>
                         </div>
                         <Input

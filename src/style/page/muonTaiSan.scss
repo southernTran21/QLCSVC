@@ -1,0 +1,205 @@
+.muon {
+    padding: 0 2rem;
+    padding-top: 1rem;
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer */
+    -khtml-user-select: none; /* KHTML browsers (e.g. Konqueror) */
+    -webkit-user-select: none; /* Chrome, Safari, and Opera */
+    -webkit-touch-callout: none; /* Disable Android and iOS callouts*/
+    &__navbar {
+        @include flexBox(space-between, center);
+        font-size: 2rem;
+    }
+    &__body {
+        @include flexBox();
+    }
+    &__loai-tai-san {
+        @include flexBox(flex-start, flex-start, column);
+        &-title {
+            padding-bottom: 0.5rem;
+        }
+    }
+    &__left {
+        width: 30%;
+    }
+    &__danh-sach-tai-san {
+        margin-top: 1rem;
+    }
+    &__table {
+        // background-color: #f1f1f1;
+        width: 100%;
+        margin-top: 0.5rem;
+        border: 1px #c9c9c9 solid;
+        &-head {
+            padding: 1rem 0;
+            border-bottom: 1px solid #c9c9c9;
+            padding-right: 10px;
+        }
+        &-body {
+            padding: 1rem 0;
+            border-bottom: 1px solid #c9c9c9;
+            &:nth-last-child(1) {
+                border-bottom: none;
+            }
+            &-wrapper {
+                max-height: 60vh;
+                min-height: 60vh;
+                overflow-x: hidden;
+                overflow-y: scroll;
+                &::-webkit-scrollbar {
+                    width: 1rem;
+                    background-color: transparent;
+                }
+                &::-webkit-scrollbar-thumb {
+                    border-radius: 10px;
+                    background: #0a3f7f;
+                }
+            }
+        }
+        &-column1 {
+            padding: 0 0.5rem;
+            width: 80%;
+        }
+        &-column2 {
+            @include centerFlexBox();
+            width: 20%;
+        }
+        &-head,
+        &-body {
+            @include flexBox();
+        }
+        &-button-plus {
+            padding: 0.5rem 1rem;
+            @include centerFlexBox();
+            cursor: pointer;
+            border-radius: 7px;
+            transition: 0.25s all ease-in-out;
+            &:hover {
+                background-color: rgb(0, 153, 255);
+                color: white;
+            }
+        }
+    }
+    &__right {
+        padding-left: 4rem;
+        width: 70%;
+    }
+    &__input {
+        input {
+            margin-top: 0.5rem;
+        }
+        &-wrapper {
+            @include flexBox();
+            width: 100%;
+        }
+        &-left,
+        &-right {
+            width: 50%;
+        }
+        &-right {
+            padding-left: 1rem;
+        }
+        &-left {
+            padding-right: 1rem;
+        }
+        &:nth-child(2),
+        &:nth-child(4) {
+            margin-top: 1rem;
+        }
+    }
+    &__danh-sach-muon {
+        width: 100%;
+        margin-top: 2rem;
+        &-table {
+            // background-color: #f1f1f1;
+            width: 100%;
+            margin-top: 0.5rem;
+            border: 1px #c9c9c9 solid;
+            &-head {
+                padding: 1rem 0;
+                border-bottom: 1px solid #c9c9c9;
+                padding-right: 10px;
+            }
+            &-body {
+                padding: 1rem 0;
+                border-bottom: 1px solid #c9c9c9;
+                &:nth-last-child(1) {
+                    border-bottom: none;
+                }
+                &-wrapper {
+                    max-height: 47vh;
+                    min-height: 47vh;
+                    overflow-x: hidden;
+                    overflow-y: scroll;
+                    &::-webkit-scrollbar {
+                        width: 1rem;
+                        background-color: transparent;
+                    }
+                    &::-webkit-scrollbar-thumb {
+                        border-radius: 10px;
+                        background: #0a3f7f;
+                    }
+                }
+            }
+            &-column1 {
+                width: 10%;
+                @include centerFlexBox();
+            }
+            &-column2 {
+                width: 40%;
+                padding: 0 0.5rem;
+            }
+            &-column3 {
+                width: 30%;
+                padding: 0 0.5rem;
+            }
+            &-column4 {
+                width: 10%;
+                padding: 0 0.5rem;
+                @include centerFlexBox();
+            }
+            &-column5 {
+                width: 10%;
+                @include centerFlexBox();
+            }
+            &-head,
+            &-body {
+                @include flexBox();
+            }
+            &-button-delete {
+                padding: 0.5rem 1rem;
+                @include centerFlexBox();
+                cursor: pointer;
+                border-radius: 7px;
+                transition: 0.25s all ease-in-out;
+                &:hover {
+                    background-color: rgb(0, 153, 255);
+                    color: white;
+                }
+            }
+        }
+    }
+    &__button-submit {
+        @include flexBox(flex-end);
+    }
+    &__button {
+        background-color: rgb(0, 162, 255);
+        padding: 1rem 2rem;
+        margin-top: 1rem;
+        border-radius: 10px;
+        color: white;
+        cursor: pointer;
+    }
+    &__icon-history {
+        cursor: pointer;
+    }
+    &__history {
+        &-item {
+            border-bottom: 1px solid #000;
+            padding: 1rem 0;
+            &:nth-last-child(1) {
+                border-bottom: none;
+            }
+        }
+    }
+}

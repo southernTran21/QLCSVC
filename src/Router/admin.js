@@ -19,6 +19,7 @@ import DonViQuanLy from "../layouts/donViQuanLy";
 import FacilityDetail from "../layouts/facility/facilityDetail";
 import FacilityNew from "../layouts/facility/facilityNew";
 import FacilityEdit from "../layouts/facility/facilityEdit";
+import DanhSachMuon from "../layouts/danhSachMuon";
 
 export default class Admin extends Component {
     handleInputURL = (accountType, match) => {
@@ -111,6 +112,11 @@ export default class Admin extends Component {
                             path={`${match}/don-vi-quan-ly`}
                             exact
                             component={DonViQuanLy}
+                        />
+                        <Route
+                            path={`${match}/danh-sach-muon`}
+                            exact
+                            component={DanhSachMuon}
                         />
                     </Fragment>
                 );

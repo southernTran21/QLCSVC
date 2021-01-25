@@ -1,0 +1,113 @@
+.danh-sach-muon {
+    &__table {
+        overflow-y: hidden;
+        overflow-x: scroll;
+        font-size: 1.3rem;
+        &-wrapper {
+            background-color: #fff;
+            margin-top: 1rem;
+            margin-left: 1rem;
+        }
+        &-head,
+        &-body {
+            width: max-content;
+        }
+        &-head {
+            background-color: #e0e0e0;
+            @include flexBox(flex-start, stretch);
+            align-content: center;
+        }
+        &-body {
+            min-height: 75vh;
+            max-height: 75vh;
+            overflow-y: scroll;
+        }
+        &-item {
+            @include flexBox(flex-start, stretch);
+            align-content: center;
+            border-bottom: 0.1px solid rgb(185, 185, 185);
+            transition: 0.25s all ease-in-out;
+            &:hover {
+                background-color: #f0f0f0;
+            }
+        }
+    }
+    &__column {
+        border-right: 1px solid black;
+        &1 {
+            width: 30rem;
+            padding: 1rem;
+        }
+        &2 {
+            width: 20rem;
+            padding: 1rem;
+        }
+        &3 {
+            width: 20rem;
+            padding: 1rem;
+        }
+        &4 {
+            width: 20rem;
+            padding: 1rem;
+        }
+        &5 {
+            width: 20rem;
+            padding: 1rem;
+        }
+        &6 {
+            width: 20rem;
+            padding: 1rem;
+        }
+        &7 {
+            width: 20rem;
+            padding: 1rem;
+        }
+        &8 {
+            width: 20rem;
+            padding: 1rem;
+        }
+        &9 {
+            width: 20rem;
+            padding: 1rem;
+        }
+        &10 {
+            width: 13rem;
+            padding: 1rem;
+            text-align: center;
+        }
+    }
+    &__modal-table {
+        border: 1px solid #c9c9c9
+    }
+    &__modal-head {
+        @include flexBox();
+        padding: 1rem 0;
+        border-bottom: 1px solid #c9c9c9;
+
+    }
+    &__modal-column1 {
+        width: 25rem;
+        padding: 0 .5rem;
+    }
+    &__modal-column2 {
+        width: 25rem;
+        padding: 0 .5rem;
+    }
+    &__modal-column3 {
+        width: 15rem;
+        padding: 0 .5rem;
+        @include centerFlexBox()
+    }
+    &__modal-body {
+        @include flexBox();
+        padding: 1rem 0;
+        border-bottom: 1px solid #c9c9c9;
+        &:nth-last-child(1) {
+            border-bottom: none;
+        }
+    }
+    
+}
+.ant-modal{
+    width: max-content !important;
+}

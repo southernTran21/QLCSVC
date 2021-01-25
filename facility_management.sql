@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th1 12, 2021 lúc 09:16 PM
+-- Thời gian đã tạo: Th1 25, 2021 lúc 01:10 AM
 -- Phiên bản máy phục vụ: 10.4.16-MariaDB
 -- Phiên bản PHP: 7.4.12
 
@@ -60,8 +60,10 @@ CREATE TABLE `categories` (
 --
 
 INSERT INTO `categories` (`ID`, `name`, `description`) VALUES
-(10, 'test1', 'test'),
-(12, 'test3', 'ádasdasd');
+(13, 'Máy Chiếu', 'Máy Chiếu'),
+(14, 'Cáp', 'Các Loại Cáp'),
+(15, 'Chuột', 'Các Loại Chuột'),
+(16, 'Ổ Cắm', 'Các Loại Ổ Cắm');
 
 -- --------------------------------------------------------
 
@@ -70,8 +72,8 @@ INSERT INTO `categories` (`ID`, `name`, `description`) VALUES
 --
 
 CREATE TABLE `chitietmuontaisan` (
-  `IDMuon` int(11) NOT NULL,
-  `IDTaiSan` int(11) NOT NULL,
+  `IDMuon` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `IDTaiSan` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
   `SoLuong` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -113,7 +115,9 @@ CREATE TABLE `donviquanly` (
 --
 
 INSERT INTO `donviquanly` (`ID`, `name`, `soDienThoai`, `email`) VALUES
-(1, 'Khoa CNTT', '123456789', 'khoacntthutech@gmail.com');
+(1, 'Khoa CNTT', '123456789', 'khoacntt@gmail.com'),
+(2, 'Khoa Quản Trị Kinh Doanh', '456789', 'khoaqtkq@gmail.com'),
+(3, 'Khoa Du Lịch', '456789', 'khoadlq@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -159,19 +163,8 @@ CREATE TABLE `facility` (
 --
 
 INSERT INTO `facility` (`ID`, `name`, `QRCODE`, `idCat`, `donViTinh`, `ngayMua`, `hanSuDung`, `giaTien`, `donViQuanLy`, `moTa`) VALUES
-('123456', 'TEST', '123456', 10, 1, '2020-11-25', 6, '100000', 1, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled'),
-('2020121', 'asdx', '2020121', 10, 1, '2020-12-02', 6, '12523', NULL, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled'),
-('202012121', 'asdx', '202012121', 10, 1, '2020-12-02', 6, '12523', 1, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled'),
-('2020121217', 'asdx', '2020121217', 10, 1, '2020-12-02', 6, '12523', 1, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled'),
-('20201212172', 'asdx', '20201212172', 10, 1, '2020-12-02', 6, '12523', 1, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled'),
-('2020121217263', 'asdx', '2020121217263', 10, 1, '2020-12-02', 6, '12523', 1, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled'),
-('20201212172637', 'asdx', '20201212172637', 10, 1, '2020-12-02', 6, '12523', 1, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled'),
-('202012121726379', 'asdx', '202012121726379', 10, 1, '2020-12-02', 6, '12523', 1, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled'),
-('202012121726379832', 'asdx', '202012121726379832', 10, 1, '2020-12-02', 6, '12523', 1, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled'),
-('202012292318562873', 'abcádasd', '202012292318562873', 10, 1, '2015-05-12', 6, '1000000', 1, 'acb abc abc abc acb acb acb'),
-('20210107151349', 'moi nhap', '202101071513499261', 10, 2, '2021-01-01', 6, '123124', 1, 'fsdfcvc sdfsd'),
-('2021121217263', 'asdx', '20201212172637983', 10, 1, '2020-12-02', 6, '12523', 1, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled'),
-('2147483647', 'asdx', '202012121724562929', 12, 1, '2020-12-02', 6, '12523', 1, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled');
+('2021012577109322', 'Ổ Cắm 500W', '2021012577109322', 16, 2, '2020-12-30', 6, '100000', 1, 'Ổ cắm loại 500W'),
+('2021012579591945', 'Máy Chiếu Panasonic', '2021012579591945', 13, 2, '2021-01-08', 12, '3000000', 2, 'Máy Chiếu Hiệu Panasonic');
 
 -- --------------------------------------------------------
 
@@ -186,16 +179,6 @@ CREATE TABLE `history` (
   `Date` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Đang đổ dữ liệu cho bảng `history`
---
-
-INSERT INTO `history` (`ID`, `QRCODE`, `Name`, `Date`) VALUES
-(7, '123456', 'TEST', '13-01-2021'),
-(8, '123456', 'TEST', '13-01-2021'),
-(9, '123456', 'TEST', '13-01-2021'),
-(10, '123456', 'TEST', '13-01-2021');
-
 -- --------------------------------------------------------
 
 --
@@ -204,13 +187,14 @@ INSERT INTO `history` (`ID`, `QRCODE`, `Name`, `Date`) VALUES
 
 CREATE TABLE `muontaisan` (
   `ID` bigint(50) NOT NULL,
-  `MaNhanVien` int(11) NOT NULL,
+  `MaNhanVien` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `SoLuong` int(11) NOT NULL,
   `SoDienThoai` varchar(11) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `Email` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `CMND` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `HoTen` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `NgayMuon` date NOT NULL,
-  `NgayTra` date NOT NULL
+  `NgayMuon` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `NgayTra` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tinhTrang` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -315,7 +299,7 @@ ALTER TABLE `account`
 -- AUTO_INCREMENT cho bảng `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT cho bảng `danhmucquyen`
@@ -327,7 +311,7 @@ ALTER TABLE `danhmucquyen`
 -- AUTO_INCREMENT cho bảng `donviquanly`
 --
 ALTER TABLE `donviquanly`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT cho bảng `donvitinh`
@@ -339,7 +323,7 @@ ALTER TABLE `donvitinh`
 -- AUTO_INCREMENT cho bảng `history`
 --
 ALTER TABLE `history`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT cho bảng `nhanvien`

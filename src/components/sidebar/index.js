@@ -6,6 +6,10 @@ import {
     UserOutlined,
     FundProjectionScreenOutlined,
     LogoutOutlined,
+    HomeOutlined,
+    PicLeftOutlined,
+    ApartmentOutlined,
+    ContainerOutlined
 } from "@ant-design/icons";
 
 const { SubMenu } = Menu;
@@ -51,10 +55,10 @@ export default class SideBar extends Component {
                     onOpenChange={this.onOpenChange}
                     style={{ width: "100%" }}
                 >
-                    <Menu.Item icon={<UserOutlined />}>
+                    <Menu.Item icon={<HomeOutlined />}>
                         <Link to="/admin">Trang Chủ</Link>
                     </Menu.Item>
-                    <Menu.Item icon={<UserOutlined />}>
+                    <Menu.Item icon={<PicLeftOutlined />}>
                         <Link to="/admin/categories">Loại Tài Sản</Link>
                     </Menu.Item>
                     <SubMenu
@@ -66,16 +70,15 @@ export default class SideBar extends Component {
                             <Link to="/admin/taisan">Tất Cả Tài Sản</Link>
                         </Menu.Item>
                         <Menu.Item key="2"><Link to="/admin/taisan-new">Tài Sản Mới</Link></Menu.Item>
-                        <Menu.Item key="3">Tôi Sử Dụng</Menu.Item>
                         <Menu.Item key="4">
                             <Link to="/admin/don-vi-tinh">Đơn Vị Tính</Link>
                         </Menu.Item>
                     </SubMenu>
-                    <Menu.Item icon={<UserOutlined />}>
+                    <Menu.Item icon={<ApartmentOutlined />}>
                         <Link to="/admin/don-vi-quan-ly">Đơn Vị Quản Lý</Link>
                     </Menu.Item>
                     <SubMenu
-                        icon={<FundProjectionScreenOutlined />}
+                        icon={<UserOutlined />}
                         title="Quản Lý Tài Khoản"
                         key="sub2"
                     >
@@ -86,6 +89,9 @@ export default class SideBar extends Component {
                             <Link to="/admin/nhanvien">Nhân Viên</Link>
                         </Menu.Item>
                     </SubMenu>
+                    <Menu.Item icon={<ContainerOutlined />}>
+                        <Link to="/admin/danh-sach-muon">Danh Sách Mượn</Link>
+                    </Menu.Item>
                 </Menu>
                 <div
                     className="sidebar__button-logout"

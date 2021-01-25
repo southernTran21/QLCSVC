@@ -10,6 +10,16 @@ router.route("/").get((req, res) => {
     });
 });
 
+router.route("/getForCat/:ID").get((req, res) => {
+    const { ID } = req.params;
+    let sql = "SELECT * FROM facility where idCat = ?";
+    db.query(sql, ID, (err, result) => {
+        if (err) throw err;
+        console.log("fetched");
+        res.json(result);
+    });
+});
+
 router.route("/getNewFacility").get((req, res) => {
     let sql =
         "SELECT * FROM `facility` WHERE idCat is null or donViQuanLy is null";
@@ -161,7 +171,7 @@ router.route("/edit/:ID").post((req, res) => {
         donViQuanLy,
         moTa,
     } = req.body;
-    console.log(req.body)
+    console.log(req.body);
     let sql =
         "UPDATE `facility` SET `name`=?,`idCat`=?,`donViTinh`=?,`ngayMua`=?,`hanSuDung`=?,`giaTien`=?,`donViQuanLy`=?,`moTa`=? WHERE ID = ?";
     db.query(
